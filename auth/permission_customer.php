@@ -3,7 +3,7 @@
 
     if(isset($_SESSION['auth'])){
 
-        if($_SESSION['auth']['role'] != 'staff' && $_SESSION['auth']['role'] != 'admin'){
+        if($_SESSION['auth']['role'] != 'customer'){
             session_destroy(); #delete all session
             echo "<script>alert('Access denied!');window.location='../login.php';</script>";
         }

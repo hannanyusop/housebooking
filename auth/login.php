@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
   <body main-theme-layout="main-theme-layout-1">
     <div class="page-wrapper">
         <div class="authentication-main">
