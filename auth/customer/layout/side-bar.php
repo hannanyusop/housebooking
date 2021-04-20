@@ -1,6 +1,6 @@
 <div class="page-sidebar">
     <div class="main-header-left d-none d-lg-block">
-        <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless"><img src="../../assets/images/endless-logo.png" alt=""></a></div>
+        <div class="logo-wrapper"><a href="index.php"><img src="../../assets/images/endless-logo.png" alt=""></a></div>
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
@@ -12,18 +12,9 @@
         </div>
         <ul class="sidebar-menu">
 
-            <li><a class="sidebar-header " href="index.php"><i data-feather="menu"></i><span>Dashboard</span></a></li>
-
-            <li class="">
-                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Parent Menu</span>
-                    <span class="badge badge-pill badge-primary">6</span><i class="fa fa-angle-right pull-right"></i>
-                </a>
-                <ul class="sidebar-submenu">
-                    <li><a href="#" class=""><i class="fa fa-circle"></i>Sub</a></li>
-                </ul>
-            </li>
-
-            <li><a class="sidebar-header" href="#" class="" target="_blank"><i data-feather="book"></i><span> Simple Menu</span></a></li>
+            <li><a class="sidebar-header " href="index.php"><i data-feather="home"></i><span>Dashboard</span></a></li>
+            <li><a class="sidebar-header" href="project-index.php"><i data-feather="book"></i><span> Project List</span></a></li>
+            <li><a class="sidebar-header " href="booking-index.php"><i data-feather="list"></i><span>Booking List</span></a></li>
         </ul>
     </div>
 </div>

@@ -10,10 +10,10 @@
 <!-- Loader ends-->
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -50,7 +50,7 @@
             <!-- Container-fluid Ends-->
         </div>
         <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
+        <?php include('layout/footer.php'); ?>
         <!-- footer end-->
     </div>
     <!-- Page Body End-->
@@ -59,6 +59,6 @@
 
 </body>
 
-<?= include('layout/script.php'); ?>
+<?php include('layout/script.php'); ?>
 <!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
 </html>

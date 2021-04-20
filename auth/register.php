@@ -20,32 +20,26 @@
                             <div class="card mt-4 p-4">
                                 <h4 class="text-center">NEW USER</h4>
                                 <h6 class="text-center">Enter your Username and Password For Signup</h6>
-                                <form class="theme-form">
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label">First Name</label>
-                                                <input class="form-control" type="text" placeholder="John">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label">Last Name</label>
-                                                <input class="form-control" type="text" placeholder="Deo">
-                                            </div>
-                                        </div>
+                                <form class="theme-form" method="post" action="verify-signup.php">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="name">Name</label>
+                                        <input class="form-control" id="name" name="name" type="text" placeholder="EX : AMHAD BIN ALI" required>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Matrix Number</label>
-                                        <input class="form-control" type="text" placeholder="B031910011">
+                                        <label class="col-form-label" for="email">Email</label>
+                                        <input class="form-control" id="email" name="email" type="text" placeholder="ahmad@example.com" required>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Email</label>
-                                        <input class="form-control" type="text" placeholder="B031910011@student.utem.edu.my">
+                                        <label class="col-form-label" for="phone">Phone Number</label>
+                                        <input class="form-control" id="phone" name="phone" type="text" placeholder="0101234567" required>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Password</label>
-                                        <input class="form-control" type="password" placeholder="**********">
+                                        <label class="col-form-label" for="password">Password</label>
+                                        <input class="form-control" id="password" name="password" type="password" placeholder="**********" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="confirm_password">Confirm Password</label>
+                                        <input class="form-control" id="password" name="confirm_password" type="password" placeholder="**********" required>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-sm-4">

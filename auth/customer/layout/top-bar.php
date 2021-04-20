@@ -1,3 +1,7 @@
+<?php
+$noti_q = $db->query("SELECT * FROM notifications WHERE customer_id=$user_id");
+
+?>
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
@@ -14,45 +18,31 @@
                 <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
                 <li class="onhover-dropdown"><i data-feather="bell"></i><span class="dot"></span>
                     <ul class="notification-dropdown onhover-show-div">
-                        <li>Notification <span class="badge badge-pill badge-primary pull-right">3</span></li>
-                        <li>
-                            <div class="media">
-                                <div class="media-body">
-                                    <h6 class="mt-0"><span><i class="shopping-color" data-feather="shopping-bag"></i></span>Your order ready for Ship..!<small class="pull-right">9:00 AM</small></h6>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
+                        <li>Notification <span class="badge badge-pill badge-primary pull-right"><?= $noti_q->num_rows ?></span></li>
+                        <?php while($noti = $noti_q->fetch_assoc()){ ;?>
+                            <li>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h6 class="mt-0">
+                                            <span>
+                                                <i class="shopping-color" data-feather="shopping-bag"></i
+                                            </span>Your order ready for Ship..!<small class="pull-right">9:00 AM</small>
+                                        </h6>
+                                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="media">
-                                <div class="media-body">
-                                    <h6 class="mt-0 txt-success"><span><i class="download-color font-success" data-feather="download"></i></span>Download Complete<small class="pull-right">2:30 PM</small></h6>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="media">
-                                <div class="media-body">
-                                    <h6 class="mt-0 txt-danger"><span><i class="alert-color font-danger" data-feather="alert-circle"></i></span>250 MB trash files<small class="pull-right">5:00 PM</small></h6>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="bg-light txt-dark"><a href="#">All</a> notification</li>
+                            </li>
+                        <?php } ?>
+                        <li class="bg-light txt-dark"><a href="notification.php">All</a> notification</li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="right_side_toggle" data-feather="message-circle"></i><span class="dot"></span></a></li>
                 <li class="onhover-dropdown">
                     <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="../../assets/images/dashboard/user.png" alt="header-user">
                         <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20">
-                        <li><a href="#"><i data-feather="user"></i>                                    Edit Profile</a></li>
-                        <li><a href="#"><i data-feather="mail"></i>                                    Inbox</a></li>
-                        <li><a href="#"><i data-feather="lock"></i>                                    Lock Screen</a></li>
-                        <li><a href="#"><i data-feather="settings"></i>                                    Settings</a></li>
-                        <li><a href="../logout.php"><i data-feather="log-out"></i>                                    Logout</a></li>
+                        <li><a href="profile-edit.php"><i data-feather="user"></i>Edit Profile</a></li>
+                        <li><a href="../logout.php"><i data-feather="log-out"></i>Logout</a></li>
                     </ul>
                 </li>
             </ul>
