@@ -13,17 +13,21 @@
         <ul class="sidebar-menu">
 
             <li><a class="sidebar-header " href="index.php"><i data-feather="menu"></i><span>Dashboard</span></a></li>
-
+            <li>
+                <a class="sidebar-header" href="project-index.php" class="" >
+                    <i data-feather="book"></i><span>Project Management</span>
+                </a>
+            </li>
             <li class="">
-                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Parent Menu</span>
-                    <span class="badge badge-pill badge-primary">6</span><i class="fa fa-angle-right pull-right"></i>
+                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>User Management</span>
+                    <i class="fa fa-angle-right pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="#" class=""><i class="fa fa-circle"></i>Sub</a></li>
+                    <li><a href="user-customer-index.php" class=""><i class="fa fa-circle"></i>Customer</a></li>
+                    <li><a href="user-agent-index.php" class=""><i class="fa fa-circle"></i>Agent</a></li>
+                    <li><a href="user-admin-index.php" class=""><i class="fa fa-circle"></i>Admin</a></li>
                 </ul>
             </li>
-
-            <li><a class="sidebar-header" href="#" class="" target="_blank"><i data-feather="book"></i><span> Simple Menu</span></a></li>
         </ul>
     </div>
 </div>

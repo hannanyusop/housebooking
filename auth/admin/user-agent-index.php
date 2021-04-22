@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_staff.php') ?>
+<?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM inventories");
+    $result = $db->query("SELECT * FROM agents");
 ?>
 <?= include('layout/head.php'); ?>
 
@@ -27,15 +27,15 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item">Inventory</li>
+                                    <li class="breadcrumb-item">User Management</li>
+                                    <li class="breadcrumb-item">Agent</li>
                                 </ol>
                             </div>
                         </div>
                         <div class="col">
                             <div class="bookmark pull-right">
                                 <ul>
-                                    <li><a href="data-inventory-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Inventory</a> </li>
+                                    <li><a href="user-agent-create.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Agent</a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -52,18 +52,26 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Name</th>
-                                            <th>Remark</th>
-                                            <th>Active</th>
-                                            <th></th>
+                                            <th>Rank</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>Status</th>
+                                            <th>Point</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php while($data = $result->fetch_assoc()){ ;?>
                                             <tr>
-                                                <td><?= $data['name']; ?></td>
-                                                <td><?= strLimit($data['remark'], 20); ?></td>
-                                                <td>2011/04/25</td>
+                                                <td><?= $data['id']; ?></td>
+                                                <td><?= strLimit($data['name'], 20); ?></td>
+                                                <td><?= strtoupper($data['rank']) ?></td>
+                                                <td><?= $data['email']; ?></td>
+                                                <td><?= $data['phone_number']; ?></td>
+                                                <td><?= ($data['is_active'] == 0)? "<span class='badge badge-dark'>Inactive</span>" : "<span class='badge badge-success'>Active</span>"; ?></td>
+                                                <td><?= getPointFormat($data['point']) ?></td>
                                                 <td>
                                                     <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
                                                     <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>

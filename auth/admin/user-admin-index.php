@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_staff.php') ?>
+<?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM blocks");
+    $result = $db->query("SELECT * FROM admin");
 ?>
 <?= include('layout/head.php'); ?>
 
@@ -27,15 +27,15 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item">Block</li>
+                                    <li class="breadcrumb-item">User Management</li>
+                                    <li class="breadcrumb-item">Admin</li>
                                 </ol>
                             </div>
                         </div>
                         <div class="col">
                             <div class="bookmark pull-right">
                                 <ul>
-                                    <li><a href="data-block-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Block</a> </li>
+                                    <li><a href="user-admin-create.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Create</a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -54,8 +54,8 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Floor</th>
-                                            <th></th>
+                                            <th>Email</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -63,10 +63,12 @@
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
-                                                <td><?= $data['floor_list']; ?></td>
+                                                <td><?= $data['email']; ?></td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                                                    <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                                                    <?php if($data['id'] != 1){ ?>
+                                                        <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
+                                                        <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>

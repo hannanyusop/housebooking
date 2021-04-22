@@ -2,19 +2,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_staff.php') ?>
+<?php include_once('../permission_admin.php') ?>
 <?php
     if(isset($_POST['name'])){
 
 
-        $floor_list = json_encode(explode(",",$_POST['floor']));
-        $name = strtoupper($_POST[name]);
-        $is_active = (isset($_POST['is_active']))? 1 : 0;
-        $inventory = "INSERT INTO blocks (name, floor_list) VALUES ('$name', '$floor_list')";
-        if (!$db->query($inventory)) {
-            echo "Error: " . $inventory . "<br>" . $db->error; exit();
+
+        $password = password_hash("secret", PASSWORD_BCRYPT);
+
+        $agents = "INSERT INTO agents (is_active, email, password, name, phone_number, rank) 
+VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]', '$_POST[rank]')";
+        if (!$db->query($agents)) {
+            echo "Error: " . $agents . "<br>" . $db->error; exit();
         }else{
-            echo "<script>alert('New block successfully inserted!');window.location='data-block.php'</script>";
+            echo "<script>alert('New agent successfully created!');window.location='user-agent-index.php'</script>";
         }
     }
 ?>
@@ -39,9 +40,9 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item active"><a href="data-block.php">Block</a> </li>
-                                    <li class="breadcrumb-item">Add</li>
+                                    <li class="breadcrumb-item">User Management</li>
+                                    <li class="breadcrumb-item active"><a href="user-agent-index.php">Agent</a> </li>
+                                        <li class="breadcrumb-item">Add</li>
                                 </ol>
                             </div>
                         </div>
@@ -60,13 +61,28 @@
                                 <form class="theme-form" method="post">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
-                                        <input class="form-control text-uppercase" name="name" id="name"  type="text" placeholder="EX : HANG TUAH" data-original-title="" required>
+                                        <input class="form-control text-uppercase" name="name" id="name" data-original-title="" required>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="floor">Floor</label>
-                                        <textarea class="form-control" name="floor" id="floor" placeholder="Ex: G,1,2,3" rows="5" required></textarea>
-                                        <small class="form-text text-muted" id="emailHelp">*Separate each floor with commas ','. Example : G,1,2,3</small>
+                                        <label class="col-form-label pt-0" for="email">Email</label>
+                                        <input class="form-control text-uppercase col-md-6" type="email" name="email" id="email" data-original-title="" required>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label pt-0" for="phone_number">Phone Number</label>
+                                        <input class="form-control text-uppercase col-md-6" type="text" name="phone_number" id="phone_number" data-original-title="" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label pt-0" for="rank">Rank</label>
+                                        <select name="rank" id="rank" class="form-control" required>
+                                            <?php foreach (getRank() as $key => $rank){ ?>
+                                                <option value="<?= $key ?>"><?= $rank ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>

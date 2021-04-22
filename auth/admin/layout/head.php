@@ -27,6 +27,7 @@
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.css">
     <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="../../assets/css/date-picker.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="color" href="../../assets/css/light-1.css" media="screen">
     <!-- Responsive css-->

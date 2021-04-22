@@ -10,6 +10,9 @@
 <!-- Theme Config -->
 <script src="../../assets/js/config.js"></script>
 
+<script src="../../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../../assets/js/datepicker/date-picker/datepicker.en.js"></script>
+<script src="../../assets/js/datepicker/date-picker/datepicker.custom.js"></script>
 <script src="../../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
 <script src="../../assets/js/typeahead/handlebars.js"></script>
 <script src="../../assets/js/typeahead/typeahead.bundle.js"></script>

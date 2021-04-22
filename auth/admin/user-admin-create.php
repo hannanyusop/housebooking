@@ -2,19 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_staff.php') ?>
+<?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM inventories");
-
     if(isset($_POST['name'])){
 
 
-        $is_active = (isset($_POST['is_active']))? 1 : 0;
-        $inventory = "INSERT INTO inventories (name, remark, is_active) VALUES ('$_POST[name]', '$_POST[remark]', $is_active)";
-        if (!$db->query($inventory)) {
-            echo "Error: " . $inventory . "<br>" . $db->error; exit();
+
+        $password = password_hash("secret", PASSWORD_BCRYPT);
+
+        $admin = "INSERT INTO admin (email, password, name) VALUES ('$_POST[email]', '$password', '$_POST[name]')";
+        if (!$db->query($admin)) {
+            echo "Error: " . $admin . "<br>" . $db->error; exit();
         }else{
-            echo "<script>alert('New inventory successfully inserted!');window.location='data-inventory.php'</script>";
+            echo "<script>alert('New admin successfully created!');window.location='user-admin-index.php'</script>";
         }
     }
 ?>
@@ -39,9 +39,9 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item active"><a href="data-inventory.php">Inventory</a> </li>
-                                    <li class="breadcrumb-item">Add</li>
+                                    <li class="breadcrumb-item">User Management</li>
+                                    <li class="breadcrumb-item active"><a href="user-agent-index.php">Admin</a> </li>
+                                        <li class="breadcrumb-item">Create</li>
                                 </ol>
                             </div>
                         </div>
@@ -54,27 +54,29 @@
                     <div class="col-sm-8 offset-md-2">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Add New Inventory</h5>
+                                <h5>Create New Admin</h5>
                             </div>
                             <div class="card-body">
                                 <form class="theme-form" method="post">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
-                                        <input class="form-control" name="name" id="name"  type="text" placeholder="EX : Meja Belajar" data-original-title="" required>
+                                        <input class="form-control text-uppercase" name="name" id="name" data-original-title="" required>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="remark">Remark</label>
-                                        <textarea class="form-control" name="remark" id="remark" type="password" placeholder="Password" rows="5">
-                                        </textarea>
+                                        <label class="col-form-label pt-0" for="email">Email</label>
+                                        <input class="form-control text-uppercase col-md-6" type="email" name="email" id="email" data-original-title="" required>
                                     </div>
-                                    <div class="checkbox p-0">
-                                        <input id="is_active" type="checkbox" data-original-title="" title="">
-                                        <label class="mb-0" for="is_active">Active</label>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label pt-0" for="password">Password</label>
+                                        <input class="form-control col-md-6" type="text" name="password" id="password" data-original-title="" value="secret" readonly>
                                     </div>
+
                                     <div class="form-group">
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <a href="data-inventory.php" class="btn btn-secondary" data-original-title="" title="">Cancel</a>
+                                            <a href="user-admin-index.php" class="btn btn-secondary" data-original-title="" title="">Cancel</a>
                                         </div>
                                     </div>
                                 </form>
