@@ -2,70 +2,84 @@
 
 require_once '../env.php';
 
+
+#generate password
+//dd(password_hash("secret", PASSWORD_BCRYPT));
+
 if(isset($_POST['email']) && isset($_POST['password'])){
 
     $email = $_POST['email']; $password = $_POST['password'];
 
-    $domain = getEmailDomain($email);
-    if(in_array($domain, $GLOBALS['allowed_mail_domain'])){
 
-        if($domain == $GLOBALS['student_mail_domain']){
-            #student
+    #customer
+    $result = $db->query("SELECT * FROM customers WHERE email='$email'");
+    $customer = $result->fetch_assoc();
 
-            $result = $db->query("SELECT * FROM users WHERE email='$email'");
-            $user = $result->fetch_assoc();
+    if($customer){
 
-            if($user){
+        if (password_verify($password, $customer['password'])) {
 
-                #check password hashing
-                if (password_verify($password, $user['password'])) {
-
-                    $_SESSION['auth'] = [
-                        'user_id' => (int)$user['id'],
-                        'fullname' => $user['fullname'],
-                        'role' => 'user'
-                    ];
-
-                    header('Location:student/index.php');
-
-                }else{
-                    echo "<script>alert('Invalid Password!');window.location='login.php'</script>";
-                }
-            }else{
-                echo "<script>alert('Invalid student email!');window.location='login.php'</script>";
-
+            if(is_null($customer['approved_at'])){
+                header('Location:customer/not-verified.php');
             }
+
+            $_SESSION['auth'] = [
+                'user_id' => (int)$customer['id'],
+                'name' => $customer['name'],
+                'role' => 'customer'
+            ];
+            
+            header('Location:customer/index.php');
 
         }else{
-
-            #staff
-            $result = $db->query("SELECT * FROM staff WHERE email='$email'");
-            $user = $result->fetch_assoc();
-
-            if($user){
-
-                #check password hashing
-                if (password_verify($password, $user['password'])) {
-
-                    $_SESSION['auth'] = [
-                        'user_id' => (int)$user['id'],
-                        'fullname' => $user['fullname'],
-                        'role' => $user['role']
-                    ];
-
-                    header('Location:staff/index.php');
-
-                }else{
-                    echo "<script>alert('Invalid Password!');window.location='login.php'</script>";
-                }
-            }else{
-                echo "<script>alert('Invalid staff email!');window.location='login.php'</script>";
-            }
+            echo "<script>alert('Invalid Password!');window.location='login.php'</script>";
         }
-
     }
 
-    echo "<script>alert('Invalid Email!');window.location='login.php'</script>";
+    #agent
+    $result = $db->query("SELECT * FROM agents WHERE email='$email'");
+    $agent = $result->fetch_assoc();
+
+    if($agent){
+
+        if (password_verify($password, $agent['password'])) {
+
+            $_SESSION['auth'] = [
+                'user_id' => (int)$agent['id'],
+                'name' => $agent['name'],
+                'role' => 'agent'
+            ];
+
+            header('Location:agent/index.php');
+
+        }else{
+            echo "<script>alert('Invalid Password!');window.location='login.php'</script>";
+        }
+    }
+
+    #admin
+    $result = $db->query("SELECT * FROM admin WHERE email='$email'");
+    $admin = $result->fetch_assoc();
+
+    if($admin){
+
+        if (password_verify($password, $admin['password'])) {
+
+            $_SESSION['auth'] = [
+                'user_id' => (int)$admin['id'],
+                'name' => $admin['name'],
+                'role' => 'admin'
+            ];
+
+            header('Location:admin/index.php');
+
+        }else{
+            echo "<script>alert('Invalid Password!');window.location='login.php'</script>";
+        }
+    }
+
+    echo "<script>alert('Email not found!');window.location='login.php'</script>";
+
 }else{
     header('Location:login.php');
 }

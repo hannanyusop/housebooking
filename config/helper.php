@@ -17,6 +17,32 @@ function getEmailDomain($email){
     $parts = explode("@",$email);
     return $parts[1];
 }
+
+function getPointFormat($pts){
+
+    return $pts. " pts";
+}
+
+function getProjectStatus($status = null){
+
+    $statuses = [
+        0 => 'Pending',
+        1 => 'On going',
+        2 => 'Finished',
+        3 => 'Cancelled',
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+function getRank($rank = null){
+
+    $ranks = [
+        'junior' => 'JUNIOR',
+        'senior' => 'SENIOR'
+    ];
+
+    return (isset($rank))? $ranks[$rank] : $ranks;
+}
 function getBackendRole($role_id = null){
 
     $roles = [
@@ -44,7 +70,7 @@ function getOption($name, $default = ''){
 
 }
 
-function sendEmail($recipient_email, $title = '', $body){
+function sendEmail($recipient_email, $title = "", $body){
 
     $GLOBALS['smtp_username'] = 'ecenterprinting@yahoo.com';
     $GLOBALS['smtp_password'] = 'idwfwfybfmqgkgfc';
