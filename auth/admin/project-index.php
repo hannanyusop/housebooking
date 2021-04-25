@@ -68,7 +68,7 @@
                                                 <td><?= $data['start']. " to ". $data['end']; ?></td>
                                                 <td><?= getProjectStatus($data['status']) ?></td>
                                                 <td>
-                                                    <a href="#" class="btn btn-success btn-xs" title="">Manage</a>
+                                                    <a href="project-manage.php?id=<?= $data['id']; ?>" class="btn btn-success btn-xs" title="">Manage</a>
                                                     <a href="#" class="btn btn-info btn-xs" type="button" title="">Edit</a>
                                                     <a href="#" class="btn btn-danger btn-xs" type="button" title="">Delete</a>
                                                 </td>

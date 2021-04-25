@@ -18,6 +18,20 @@ function getEmailDomain($email){
     return $parts[1];
 }
 
+function getHouseType($type = null){
+
+    $types = [
+        1 => 'Single Family Detached House',
+        2 => 'Apartment',
+        3 => 'Bungalow',
+        4 => 'Cabin',
+        5 => 'Carriage/Coach House',
+        6 => 'Chalet'
+    ];
+
+    return (isset($type))? $types[$type] : $types;
+}
+
 function getPointFormat($pts){
 
     return $pts. " pts";
@@ -388,6 +402,11 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
 
 function strLimit($string, $limit = 20){
     return (strlen($string) > $limit)?substr($string, 0, $limit) . '...' : $string ;
+}
+
+function displayPrice($price){
+
+    return "RM ".number_format($price, 2);
 }
 
 
