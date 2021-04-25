@@ -4,55 +4,32 @@
 
 <?php include_once('../permission_admin.php') ?>
 <?php
-    if(isset($_GET['activate'])){
+    $result = $db->query("SELECT * FROM agents WHERE deleted_at IS NOT NULL");
 
-        $customer_id = $_GET['activate'];
+    if(isset($_GET['restore'])){
 
-        $update_customer ="UPDATE customers SET approved_at=NOW() WHERE id=$customer_id";
+        $agent_id = $_GET['restore'];
 
-        if (!$db->query($update_customer)) {
-            echo "Error: " . $update_customer . "<br>" . $db->error; exit();
-        }else{
-            echo "<script>alert('Customer successfully activated!');window.location='user-customer-index.php'</script>";
-        }
-    }
-
-    if(isset($_GET['deactivate'])){
-
-        $customer_id = $_GET['deactivate'];
-
-        $update_customer ="UPDATE customers SET approved_at=null WHERE id=$customer_id";
+        $update_customer ="UPDATE agents SET deleted_at=NULL WHERE id=$agent_id";
 
         if (!$db->query($update_customer)) {
             echo "Error: " . $update_customer . "<br>" . $db->error; exit();
         }else{
-            echo "<script>alert('Customer successfully deactivated!');window.location='user-customer-index.php'</script>";
+            echo "<script>alert('Agent successfully restored!');window.location='user-agent-deleted.php'</script>";
         }
     }
-
-    if (isset($_GET['reset_password'])){
-
-        $default_password = password_hash("secret", PASSWORD_BCRYPT);
-
-        if (!$db->query("UPDATE customers SET password='$default_password' WHERE id=$_GET[reset_password]")) {
-            echo "Error: Updating staff password." . $db->error; exit();
-        }else{
-            echo "<script>alert('Customer\'s Password has been reset to default. (Default : secret)');window.location='user-customer-index.php'</script>";
-        }
-    }
-    $result = $db->query("SELECT * FROM customers");
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
 <!-- Loader ends-->
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -64,16 +41,10 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">User Management</li>
-                                    <li class="breadcrumb-item">Customer</li>
+                                    <li class="breadcrumb-item active"><a href="user-agent-index.php">Agent</a> </li>
+                                    <li class="breadcrumb-item">Deleted</li>
                                 </ol>
                             </div>
-                        </div>
-                        <div class="col">
-<!--                            <div class="bookmark pull-right">-->
-<!--                                <ul>-->
-<!--                                    <li><a href="data-block-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Customer</a> </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -90,9 +61,12 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>Rank</th>
                                             <th>Email</th>
                                             <th>Phone Number</th>
                                             <th>Status</th>
+                                            <th>Point</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -100,17 +74,13 @@
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
+                                                <td><?= strtoupper($data['rank']) ?></td>
                                                 <td><?= $data['email']; ?></td>
                                                 <td><?= $data['phone_number']; ?></td>
-                                                <td><?= (is_null($data['approved_at']))? "<span class='badge badge-dark'>Inactive</span>" : "<span class='badge badge-success'>Active</span>"; ?></td>
+                                                <td><?= ($data['is_active'] == 0)? "<span class='badge badge-dark'>Inactive</span>" : "<span class='badge badge-success'>Active</span>"; ?></td>
+                                                <td><?= getPointFormat($data['point']) ?></td>
                                                 <td>
-                                                    <?php if(is_null($data['approved_at'])){ ?>
-                                                        <a href="user-customer-index.php?activate=<?= $data['id']; ?>" class="btn btn-info btn-xs" onclick="return confirm('Are you sure want to activate this user?')">Activate</a>
-                                                    <?php }else{ ?>
-                                                        <a href="user-customer-edit.php?id=<?= $data['id']; ?>" class="btn btn-success btn-xs" type="button">Edit</a>
-                                                        <a href="user-customer-index.php?reset_password=<?= $data['id']; ?>" onclick="return confirm('Are you sure want to reset this customer password using default password?')" class="btn btn-secondary btn-xs" type="button">Reset Password</a>
-                                                        <a href="user-customer-index.php?deactivate=<?= $data['id']; ?>" class="btn btn-info btn-xs" onclick="return confirm('Are you sure want to deactivate this user?')">Deactivate</a>
-                                                    <?php } ?>
+                                                    <a href="user-agent-deleted.php?restore=<?= $data['id']; ?>" onclick="return confirm('Are you sure want to restore this agent?')" class="btn btn-warning btn-xs" title="">Restore</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -134,6 +104,6 @@
 
 </body>
 
-<?= include('layout/script.php'); ?>
+<?php include('layout/script.php'); ?>
 <!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
 </html>
