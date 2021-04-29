@@ -31,33 +31,87 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
             }
         }
 
-        if(isset($_POST['fileToUpload'])){
+        if(isset($_POST['edit_house'])){
+
+            $house_id = $_POST['house_id'];
+
+            $house_q = $db->query("SELECT * FROM houses WHERE project_id='$_GET[id]' AND id='$house_id'");
+            $house = $house_q->fetch_assoc();
+
+            if(!$house){
+                echo "<script>alert('House not exist!');window.location='project-manage.php?id=$project_id'</script>";
+            }
+
+            $update_house = "UPDATE houses SET name='$_POST[name]', price='$_POST[price]',type='$_POST[type]',point='$_POST[point]' WHERE project_id='$_GET[id]' AND id='$house_id'";
+
+            if (!$db->query($update_house)) {
+                echo "Error: " . $update_house . "<br>" . $db->error; exit();
+            }else{
+                echo "<script>alert('House successfully udpated!');window.location='project-manage.php?id=$project_id'</script>";
+            }
+
+        }
 
 
-            dd($_POST['fileToUpload']);
+        if(isset($_POST['title'])){
+
             $target_dir = "../../assets/uploads/";
-            $temp = explode(".", $_FILES["file_location"]["name"]);
+            $temp = explode(".", $_FILES["file"]["name"]);
             $rename = round(microtime(true)) . '.' . end($temp);
             $file_location = $target_dir.$rename;
 
             #check if file more than 10MB
-            if($_FILES['file_location']['size'] > 10000000){
+            if($_FILES['file']['size'] > 10000000){
                 echo "<script>alert('Ops! Exceed file limit.(10MB)');window.location='project-manage.php?id=$project_id';</script>";
+
+                exit();
             }
 
 
             try{
-                move_uploaded_file($_FILES["file_location"]["tmp_name"], $file_location);
+                move_uploaded_file($_FILES["file"]["tmp_name"], $file_location);
             }catch (Exception $e){
                 var_dump($e);exit();
             }
 
-            $insert_b = "INSERT INTO houses (project_id, title, file_location) VALUES ($project_id, '$_POST[title]', '$file_location')";
+            $insert_b = "INSERT INTO project_brochures (project_id,title,file_location) VALUES ($project_id, '$_POST[title]', '$file_location')";
 
             if (!$db->query($insert_b)) {
                 echo "Error: " . $insert_b . "<br>" . $db->error; exit();
             }else{
-                echo "<script>alert('New brochure successfully created!');window.location='project-manage.php?id=$project_id'</script>";
+                echo "<script>alert('New brochure successfully added!');window.location='project-manage.php?id=$project_id'</script>";
+            }
+        }
+
+        if(isset($_GET['delete'])){
+
+            $brochure_q = $db->query("SELECT * FROM project_brochures WHERE id='$_GET[delete]'");
+            $brochure = $brochure_q->fetch_assoc();
+
+            if(!$brochure){
+                echo "<script>alert('Brochure not exist!');window.location='project-manage.php?id=$project_id'</script>";
+            }
+
+            if (!$db->query("DELETE FROM project_brochures WHERE id=$_GET[delete]")) {
+                echo "Error: ". $db->error; exit();
+            }else{
+                unlink($brochure['file_location']);
+                echo "<script>alert('Brochure successfully deleted!');window.location='project-manage.php?id=$project_id'</script>";
+            }
+        }
+        if(isset($_GET['delete_house'])){
+
+            $brochure_q = $db->query("SELECT * FROM houses WHERE id='$_GET[delete_house]'");
+            $brochure = $brochure_q->fetch_assoc();
+
+            if(!$brochure){
+                echo "<script>alert('House not exist!');window.location='project-manage.php?id=$project_id'</script>";
+            }
+
+            if (!$db->query("DELETE FROM houses WHERE id=$_GET[delete_house]")) {
+                echo "Error: ". $db->error; exit();
+            }else{
+                echo "<script>alert('House successfully deleted!');window.location='project-manage.php?id=$project_id'</script>";
             }
         }
 
@@ -108,15 +162,15 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <form class="theme-form" method="post"  enctype="multipart/form-data">
+                                <form class="theme-form" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="title">Title</label>
                                         <input class="form-control" id="title" name="title" required>
                                         <small class="form-text text-muted" id="titleHelp"></small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="file_location">File</label>
-                                        <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+                                        <label for="file">File</label>
+                                        <input class="form-control" type="file" name="file" id="file" accept="image/*">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-info">Add Brochure</button>
@@ -132,10 +186,11 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
 
                                     <?php while($brochure = $brochures->fetch_assoc()){ ;?>
                                         <figure class="col-xl-3 col-md-4 col-6" itemprop="associatedMedia" itemscope="">
-                                            <a href="../../assets/images/big-lightgallry/013.jpg" itemprop="contentUrl" data-size="1600x950" data-original-title="" title="">
-                                                <img class="img-thumbnail" src="../../assets/images/lightgallry/013.jpg" itemprop="thumbnail" alt="Image description" data-original-title="" title="">
+                                            <a href="<?= $brochure['file_location'] ?>" itemprop="contentUrl" data-size="1600x950" data-original-title="" title="">
+                                                <img class="img-thumbnail" src="<?= $brochure['file_location'] ?>" itemprop="thumbnail" alt="Image description" data-original-title="" title="">
                                             </a>
-                                            <figcaption itemprop="caption description"><?= $brochure['title'] ?></figcaption>
+                                            <p><?= $brochure['title'] ?></p>
+                                            <a href="project-manage.php?id=<?=$project_id?>&delete=<?=$brochure['id']?>" onclick="return confirm('Are you sure want to remove this brochure?')" class="btn btn-danger btn-sm btn-round"><i class="fa fa-trash"></i> </a>
                                         </figure>
                                     <?php } ?>
                                 </div>
@@ -166,14 +221,63 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                                                     <tr>
                                                         <td><?= $house['id']; ?></td>
                                                         <td><?= strLimit($house['name'], 20); ?></td>
-                                                        <td><?= strLimit($house['type'], 20); ?></td>
+                                                        <td><?= strLimit(getHouseType($house['type']), 20); ?></td>
                                                         <td><?= displayPrice($house['price']); ?></td>
                                                         <td class="text-center"><?= (is_null($house['current_booking_id'])) ? " - " : $house['current_booking_id'] ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-success btn-xs">Edit</a>
+                                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#house<?= $house['id']; ?>">Edit</a>
                                                             <?php if($house['current_booking_id'] == NULL){ ?>
-                                                                <a href="" class="btn btn-danger btn-xs" >Delete</a>
+                                                                <a href="project-manage.php?id=<?=$project_id?>&delete_house=<?=$house['id']?>" onclick="return confirm('Are you sure want to delete this house?')" class="btn btn-danger btn-xs" >Delete</a>
                                                             <?php } ?>
+                                                            <div class="modal fade" id="house<?= $house['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="house<?= $house['id']; ?>" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <form method="post">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="house"><?= strLimit($house['name'], 20); ?></h5>
+                                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="theme-form">
+                                                                                    <input class="form-control" id="edit_house" name="edit_house" type="hidden" value="true">
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-form-label pt-0" for="name">Name</label>
+                                                                                        <input class="form-control" id="name" name="name" type="text" value="<?=$house['name'] ?>" required>
+                                                                                        <input type="hidden" name="house_id" value="<?= $house['id']; ?>">
+                                                                                        <small class="form-text text-muted" id="nameHelp"></small>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-form-label pt-0" for="type">Type</label>
+                                                                                        <select name="type" id="type" class="form-control" required>
+                                                                                            <?php foreach (getHouseType() as $key => $type){ ?>
+                                                                                                <option value="<?= $key ?>" <?= ($house['type'] == $key)? "selected" : "" ?>><?= $type ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                        <small class="form-text text-muted" id="nameHelp"></small>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-form-label pt-0" for="price">Price</label>
+                                                                                        <input class="form-control" id="price" name="price" type="text" value="<?= $house['price'] ?>" required>
+                                                                                        <small class="form-text text-muted" id="helpPrice"></small>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-form-label pt-0" for="point">Point</label>
+                                                                                        <input class="form-control" id="price" name="point" type="text" value="<?= $house['point'] ?>" required>
+                                                                                        <small class="form-text text-muted" id="helpPoint"></small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn btn-secondary btn-md" type="button" data-dismiss="modal">Close</button>
+                                                                                <button class="btn btn-primary btn-md" type="submit">Save changes</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
