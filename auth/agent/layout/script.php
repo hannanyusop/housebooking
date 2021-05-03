@@ -8,8 +8,9 @@
 <!-- Sidebar jquery-->
 <script src="../../assets/js/sidebar-menu.js"></script>
 <!-- Theme Config -->
+<script src="../../assets/js/owlcarousel/owl.carousel.js"></script>
 <script src="../../assets/js/config.js"></script>
-
+<script src="../../assets/js/ecommerce.js"></script>
 <script src="../../assets/js/typeahead/handlebars.js"></script>
 <script src="../../assets/js/typeahead/typeahead.bundle.js"></script>
 <script src="../../assets/js/typeahead/typeahead.custom.js"></script>

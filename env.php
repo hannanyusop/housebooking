@@ -19,9 +19,7 @@ include_once 'config/db_config.php';
 #include helper.php
 include_once "config/helper.php";
 
-$GLOBALS['APP_NAME'] = 'KAMSIS MANAGEMENT SYSTEM';
-$GLOBALS['allowed_mail_domain'] = array('student.utem.edu.my', 'staff.utem.edu.my');
-$GLOBALS['student_mail_domain'] = 'student.utem.edu.my';
+$GLOBALS['APP_NAME'] = 'HOUSE BOOKING SYSTEM';
 
 #PHP Mailer
 //ecenterprinting

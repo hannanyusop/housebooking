@@ -13,13 +13,14 @@
         <ul class="sidebar-menu">
 
             <li><a class="sidebar-header " href="index.php"><i data-feather="menu"></i><span>Dashboard</span></a></li>
-
+            <li><a class="sidebar-header " href="project-index.php"><i data-feather="briefcase"></i><span>Project</span></a></li>
             <li class="">
-                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Parent Menu</span>
-                    <span class="badge badge-pill badge-primary">6</span><i class="fa fa-angle-right pull-right"></i>
+                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Booking</span>
+                    <i class="fa fa-angle-right pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="#" class=""><i class="fa fa-circle"></i>Sub</a></li>
+                    <li><a href="#" class=""><i class="fa fa-circle"></i>New Booking</a></li>
+                    <li><a href="#" class=""><i class="fa fa-circle"></i>View</a></li>
                 </ul>
             </li>
 
