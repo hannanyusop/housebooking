@@ -1,8 +1,9 @@
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless">
-                    <img src="../../assets/images/endless-logo.png" alt=""></a></div>
+            <div class="logo-wrapper">
+                <img src="../../assets/images/logo.png" alt="">
+            </div>
         </div>
         <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
