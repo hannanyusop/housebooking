@@ -93,7 +93,7 @@ $project_count = $result->num_rows;
                                             <?php } ?>
                                         </div>
                                         <div class="card-footer text-center">
-                                            <a href="project-view.php?id=<?= $project['id'] ?>" class="btn btn-primary btn-round">View</a>
+                                            <a href="index-list.php?id=<?= $project['id'] ?>" class="btn btn-primary btn-round">View</a>
                                         </div>
                                     </div>
                                 </div>
