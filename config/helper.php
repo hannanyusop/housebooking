@@ -48,6 +48,19 @@ function getProjectStatus($status = null){
 
     return (isset($status))? $statuses[$status] : $statuses;
 }
+
+function getBadgeProjectStatus($status = null){
+
+    $statuses = [
+        0 => "<span class='badge badge-warning'>Pending</span>",
+        1 => "<span class='badge badge-success'>On going</span>",
+        2 => "<span class='badge badge-info'>Finished</span>",
+        3 => "<span class='badge badge-dark'>Cancelled</span>",
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
 function getRank($rank = null){
 
     $ranks = [

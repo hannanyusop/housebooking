@@ -20,6 +20,7 @@ include_once 'config/db_config.php';
 include_once "config/helper.php";
 
 $GLOBALS['APP_NAME'] = 'HOUSE BOOKING SYSTEM';
+$GLOBALS['SHORT NAME'] = 'HBS';
 
 #PHP Mailer
 //ecenterprinting
