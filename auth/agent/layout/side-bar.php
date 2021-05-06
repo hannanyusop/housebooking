@@ -8,13 +8,8 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li><a class="nav-link" href="project-index.php"><i class="fas fa-pencil-ruler"></i> <span>Project</span></a></li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-exclamation"></i> <span>Booking</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">503</a></li>
-                </ul>
-            </li>
+            <li><a class="nav-link" href="project-index.php"><i class="fas fa-building"></i> <span>Project</span></a></li>
+            <li><a class="nav-link" href="booking-index.php"><i class="fas fa-fire"></i> <span>Booking</span></a></li>
         </ul>
     </aside>
 </div>

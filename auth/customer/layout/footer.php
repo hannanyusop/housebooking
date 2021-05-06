@@ -1,12 +1,8 @@
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright 2019 © Endless All rights reserved.</p>
-            </div>
-            <div class="col-md-6">
-                <p class="pull-right mb-0">Hand crafted & made with<i class="fa fa-heart"></i></p>
-            </div>
-        </div>
+<footer class="main-footer">
+    <div class="footer-left">
+        Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+    </div>
+    <div class="footer-right">
+
     </div>
 </footer>

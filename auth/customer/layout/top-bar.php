@@ -1,70 +1,56 @@
-<?php
-$noti_q = $db->query("SELECT * FROM notifications WHERE customer_id=$user_id");
-
-?>
-<div class="page-main-header">
-    <div class="main-header-right row">
-        <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless">
-                    <img src="../../assets/images/endless-logo.png" alt=""></a></div>
-        </div>
-        <div class="mobile-sidebar">
-            <div class="media-body text-right switch-sm">
-                <label class="switch"><a href="#"><i id="sidebar-toggle" data-feather="align-left"></i></a></label>
-            </div>
-        </div>
-        <div class="nav-right col p-0">
-            <ul class="nav-menus">
-                <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
-                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="dot"></span>
-                    <ul class="notification-dropdown onhover-show-div">
-                        <li>Notification <span class="badge badge-pill badge-primary pull-right"><?= $noti_q->num_rows ?></span></li>
-                        <?php while($noti = $noti_q->fetch_assoc()){ ;?>
-                            <li>
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h6 class="mt-0">
-                                            <span>
-                                                <i class="shopping-color" data-feather="shopping-bag"></i
-                                            </span>Your order ready for Ship..!<small class="pull-right">9:00 AM</small>
-                                        </h6>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p>
-                                    </div>
-                                </div>
-                            </li>
-                        <?php } ?>
-                        <li class="bg-light txt-dark"><a href="notification.php">All</a> notification</li>
-                    </ul>
-                </li>
-                <li class="onhover-dropdown">
-                    <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="../../assets/images/dashboard/user.png" alt="header-user">
-                        <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
+<div class="navbar-bg"></div>
+<nav class="navbar navbar-expand-lg main-navbar">
+    <a href="index.php" class="navbar-brand sidebar-gone-hide"><?= $GLOBALS['SHORT NAME'] ?></a>
+    <a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
+    <div class="nav-collapse">
+        <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
+            <i class="fas fa-ellipsis-v"></i>
+        </a>
+    </div>
+    <form class="form-inline ml-auto">
+        <ul class="navbar-nav">
+        </ul>
+    </form>
+    <ul class="navbar-nav navbar-right">
+        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                <div class="dropdown-header">Notifications
+                    <div class="float-right">
+                        <a href="#">Mark All As Read</a>
                     </div>
-                    <ul class="profile-dropdown onhover-show-div p-20">
-                        <li><a href="profile-edit.php"><i data-feather="user"></i>Edit Profile</a></li>
-                        <li><a href="../logout.php"><i data-feather="log-out"></i>Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
-        </div>
-        <script id="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">
-
-                <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-                <div class="ProfileCard-details">
-                    <div class="ProfileCard-realName">{{name}}</div>
+                </div>
+                <div class="dropdown-list-content dropdown-list-icons">
+                    <a href="#" class="dropdown-item dropdown-item-unread">
+                        <div class="dropdown-item-icon bg-primary text-white">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="dropdown-item-desc">
+                            Template update is available now!
+                            <div class="time text-primary">2 Min Ago</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="dropdown-footer text-center">
+                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
-        </script>
-        <script id="empty-template" type="text/x-handlebars-template">
-            <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
-
-        </script>
-    </div>
-</div>
-<div class="loader-wrapper">
-    <div class="loader bg-white">
-        <div class="whirly-loader"> </div>
-    </div>
-</div>
+        </li>
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="../../asset/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block">Hi, <?=$_SESSION['auth']['name'] ?></div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-title">Logged in 5 min ago</div>
+                <a href="#" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> Profile
+                </a>
+                <a href="booking-index.php" class="dropdown-item has-icon">
+                    <i class="fas fa-fire"></i> My Booking
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="../logout.php" class="dropdown-item has-icon text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>

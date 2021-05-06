@@ -61,6 +61,30 @@ function getBadgeProjectStatus($status = null){
     return (isset($status))? $statuses[$status] : $statuses;
 }
 
+function getBookingStatus($status = null){
+
+    $statuses = [
+        0 => 'Pending',
+        1 => 'Process',
+        2 => 'Completed',
+        3 => 'Cancelled/Rejected',
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
+function getBadgeBookingStatus($status = null){
+
+    $statuses = [
+        0 => "<span class='badge badge-warning'>Pending</span>",
+        1 => "<span class='badge badge-info'>Process</span>",
+        2 => "<span class='badge badge-success'>Completed</span>",
+        3 => "<span class='badge badge-dark'>Cancelled/Rejected</span>",
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
 function getRank($rank = null){
 
     $ranks = [

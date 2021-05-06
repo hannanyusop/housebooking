@@ -2,8 +2,17 @@
 <html lang="en">
 <?php include_once('../permission_agent.php') ?>
 <?php
-if(isset($_GET['house_id'])){
-    $house_id = $_GET['house_id'];
+if(isset($_GET['id'])){
+
+    $booking_id = $_GET['id'];
+    $booking_q = $db->query("SELECT * FROM bookings WHERE id='$booking_id' AND agent_id = $user_id");
+    $booking = $booking_q->fetch_assoc();
+
+    if(!$booking){
+        echo "<script>alert('Booking not exist!');window.location='booking-index.php'</script>";
+    }
+
+    $house_id = $booking['house_id'];
 
     $house_q = $db->query("SELECT * FROM houses WHERE id=$house_id");
     $house = $house_q->fetch_assoc();
@@ -15,21 +24,9 @@ if(isset($_GET['house_id'])){
         echo "<script>alert('House not exist!');window.location='project-index.php'</script>";
     }
 
-    $customers = $db->query("SELECT * FROM customers");
 
-    if(isset($_POST['customer_id'])){
-
-        $code = rand(11111,99999);
-
-        $booking = "INSERT INTO bookings (house_id,agent_id,customer_id,status,code,point_gain, remark, created_at) VALUES ('$house[id]', $user_id, '$_POST[customer_id]', 0, '$code', 0, '$_POST[remark]', NOW())";
-        if (!$db->query($booking)) {
-            echo "Error: " . $booking . "<br>" . $db->error; exit();
-        }else{
-
-            $last_id = $db->insert_id;
-            echo "<script>alert('New project successfully created!');window.location='booking-view.php?id=".$last_id."'</script>";
-        }
-    }
+    $customer_q = $db->query("SELECT * FROM customers WHERE id='$booking[customer_id]]'");
+    $customer = $customer_q->fetch_assoc();
 
 }else{
     echo "<script>alert('Error : missing parameter!');window.location='project-index.php'</script>";
@@ -46,7 +43,7 @@ if(isset($_GET['house_id'])){
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h5>Create Booking Request</h5>
+                    <h6>Booking View</h6>
                 </div>
 
                 <div class="section-body">
@@ -55,12 +52,6 @@ if(isset($_GET['house_id'])){
                             <form method="post">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-3 col-form-label">Project</label>
-                                            <div class="col-sm-9">
-                                                <p class="font-weight-bold"><?=$project['name']?></p>
-                                            </div>
-                                        </div>
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-3 col-form-label">Project</label>
                                             <div class="col-sm-9">
@@ -85,112 +76,87 @@ if(isset($_GET['house_id'])){
                                                 <p class="font-weight-bold"><?= $house['point'] ?></p>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="customer_id" class="col-sm-3 col-form-label">Customer</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group mb-3">
-                                                    <select class="form-control" id="customer_id" name="customer_id">
-                                                        <option value="null">-- Select Customer --</option>
-                                                        <?php while($customer = $customers->fetch_assoc()){ ;?>
-                                                            <option value="<?=$customer['id']?>">
-                                                                <?=$customer['name']; ?>
-                                                            </option>
-                                                        <?php } ?>
-                                                    </select>
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="button" onclick="getDetail()">Get Details</button>
-                                                    </div>
+
+                                        <hr>Customer Details
+
+                                        <div id="customer-details">
+                                            <div class="form-group row">
+                                                <label for="name" class="col-sm-3 col-form-label">Name</label>
+                                                <div class="col-sm-9">
+                                                    <p class="font-weight-bold" id="name"><?= $customer['name']?></p>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="alert alert-danger throw_danger"></div>
-                                        </div>
-                                        <div id="customer-details">
                                             <div class="form-group row">
                                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-9">
-                                                    <p class="font-weight-bold" id="email">nan_s96@yahoo.com</p>
+                                                    <p class="font-weight-bold" id="email"><?= $customer['email']?></p>
                                                 </div>
                                             </div>
-
                                             <div class="form-group row">
                                                 <label for="phone_number" class="col-sm-3 col-form-label">Phone Number</label>
                                                 <div class="col-sm-9">
-                                                    <p class="font-weight-bold" id="phone_number">0105960586</p>
+                                                    <p class="font-weight-bold" id="phone_number"><?= $customer['phone_number']?></p>
+                                                </div>
+                                            </div>
+
+                                            <hr>Booking Details
+
+                                            <div class="form-group row">
+                                                <label for="remark" class="col-sm-3 col-form-label">Created At</label>
+                                                <div class="col-sm-9">
+                                                    <p><?= $booking['created_at'] ?> </p>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="remark" class="col-sm-3 col-form-label">Remark</label>
                                                 <div class="col-sm-9">
-                                                    <textarea rows="5" class="form-control" name="remark"><?= (isset($_POST['remark']))?$_POST['remark'] : "" ?> </textarea>
+                                                    <p><?= $booking['remark'] ?> </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="code" class="col-sm-3 col-form-label">Security Code</label>
+                                                <div class="col-sm-9">
+                                                    <p class="font-weight-bold font-secondary" id="code"><?= $booking['code']?></p>
+                                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                                        Share this security code to your client for booking approval
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="booking_status" class="col-sm-3 col-form-label">Booking Status</label>
+                                                <div class="col-sm-9">
+                                                    <p class="font-weight-bold" id="booking_status"><?= getBadgeBookingStatus($booking['status']) ?></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="booking_status" class="col-sm-3 col-form-label">Reward Gain</label>
+                                                <div class="col-sm-9">
+                                                    <p class="font-weight-bold" id="booking_status"><?= $booking['point_gain'] ?></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-success btn-lg btn-block" id="submit">Send Booking Request To Customer</button>
+                                        <a href="booking-index.php" class="btn btn-info btn-lg">Back</a>
+                                        <?php if($booking['status'] == 0){ ?>
+                                        <button type="submit" class="btn btn-danger btn-lg float-right" id="submit">Cancel Booking</button>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
             </section>
         </div>
         <?php include('layout/footer.php'); ?>
     </div>
 </div>
 <?php include('layout/script.php'); ?>
-<script type="text/javascript">
-
-    submit = $("#submit");
-    customer_details = $("#customer-details");
-    customer_id = $("#customer_id");
-    email = $("#email");
-    phone_number = $("#phone_number");
-    throw_danger = $(".throw_danger").hide();
-
-    $(function (){
-        start();
-    });
-
-    function start(){
-        customer_details.hide();
-        submit.hide();
-    }
-
-    function getDetail(){
-
-
-        var postForm = {
-            'customer_id'     : customer_id.val()
-        };
-
-        $.ajax({
-            url: "ajax-search-employee-detail.php",
-            type: "post",
-            data      : postForm,
-            dataType  : 'json',
-            success   : function(data) {
-                console.log(data);
-                if (!data.success) {
-                    start();
-                    throw_danger.text(data.message).show();
-                }
-                else {
-
-                    throw_danger.hide();
-                    customer_details.show();
-                    submit.show();
-                    email.text(data.details.email);
-                    phone_number.text(data.details.phone_number);
-                }
-            }
-        })
-    }
-</script>
 </body>
 </html>
