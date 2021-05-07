@@ -6,7 +6,7 @@
 if(isset($_GET['id'])){
 
     $booking_id = $_GET['id'];
-    $booking_q = $db->query("SELECT * FROM bookings WHERE id='$booking_id' AND agent_id = $booking_id");
+    $booking_q = $db->query("SELECT * FROM bookings WHERE id='$booking_id' AND customer_id = $user_id");
     $booking = $booking_q->fetch_assoc();
 
     if(!$booking){
