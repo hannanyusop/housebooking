@@ -79,7 +79,7 @@ if(isset($_GET['id'])){
                                                 <p class="font-weight-bold"><?= displayPrice($house['price'])?></p>
                                             </div>
                                         </div>
-                                        
+
                                         <hr>Agent Details
 
                                         <div id="customer-details">

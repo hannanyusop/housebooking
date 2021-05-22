@@ -28,6 +28,15 @@
                     <li><a href="user-admin-index.php" class=""><i class="fa fa-circle"></i>Admin</a></li>
                 </ul>
             </li>
+            <li class="">
+                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Claim & Voucher</span>
+                    <i class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="voucher-index.php" class=""><i class="fa fa-circle"></i>Voucher</a></li>
+                    <li><a href="claim-agent-index.php" class=""><i class="fa fa-circle"></i>Claim</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

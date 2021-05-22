@@ -61,6 +61,26 @@ function getBadgeProjectStatus($status = null){
     return (isset($status))? $statuses[$status] : $statuses;
 }
 
+function getVoucherStatus($status = null){
+
+    $statuses = [
+        0 => 'Inactive',
+        1 => 'Active',
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
+function getBadgeVoucherStatus($status = null){
+
+    $statuses = [
+        0 => "<span class='badge badge-dark'>Inactive</span>",
+        1 => "<span class='badge badge-success'>Active</span>",
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
 function getBookingStatus($status = null){
 
     $statuses = [
@@ -444,6 +464,11 @@ function strLimit($string, $limit = 20){
 function displayPrice($price){
 
     return "RM ".number_format($price, 2);
+}
+
+function displayPoint($point){
+
+    return $point." Ptz";
 }
 
 

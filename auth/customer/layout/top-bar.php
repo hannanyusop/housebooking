@@ -46,6 +46,12 @@
                 <a href="booking-index.php" class="dropdown-item has-icon">
                     <i class="fas fa-fire"></i> My Booking
                 </a>
+                <a href="voucher-index.php" class="dropdown-item has-icon">
+                    <i class="fas fa-fire"></i> Voucher
+                </a>
+                <a href="voucher-my.php" class="dropdown-item has-icon">
+                    <i class="fas fa-fire"></i> My Voucher
+                </a>
                 <div class="dropdown-divider"></div>
                 <a href="../logout.php" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
