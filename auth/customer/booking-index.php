@@ -20,9 +20,8 @@ $project_count = $result->num_rows;
                 <div class="section-header">
                     <h1>Booking List</h1>
                     <div class="section-header-breadcrumb">
-                        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                        <div class="breadcrumb-item"><a href="#">Layout</a></div>
-                        <div class="breadcrumb-item">Top Navigation</div>
+                        <div class="breadcrumb-item active"><a href="index.php">Dashboard</a></div>
+                        <div class="breadcrumb-item">Booking List</div>
                     </div>
                 </div>
 
@@ -61,11 +60,10 @@ $project_count = $result->num_rows;
                                             <td><?= $project['name'] ?></td>
                                             <td><?= getHouseType($house['type']) ?></td>
                                             <td><?= $agent['name'] ?></td>
-                                            <td><?= getBadgeProjectStatus($booking['status']) ?></td>
+                                            <td><?= getBadgeBookingStatus($booking['status']) ?></td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <a href="booking-view.php?id=<?= $booking['id']?>" class="btn btn-success">View</a>
-                                                    <a href="#" class="btn btn-danger">Decline</a>
                                                 </div>
                                             </td>
                                         </tr>

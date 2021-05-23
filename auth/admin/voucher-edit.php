@@ -41,7 +41,7 @@ if(isset($_GET['id'])){
             }
         }
 
-        $name = $_POST['name']; $quantity = $_POST['quantity']; $cost = $_POST['cost'];
+        $name = $_POST['name']; $cost = $_POST['cost'];
 
         $valid_till = date('Y-m-d', strtotime($_POST['valid_till']));
         $status = ($_POST['status'] == 1)? 1 : 0;

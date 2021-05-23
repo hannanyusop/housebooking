@@ -61,6 +61,34 @@ function getBadgeProjectStatus($status = null){
     return (isset($status))? $statuses[$status] : $statuses;
 }
 
+function getBookingStatus($status = null){
+
+    $statuses = [
+        0 => 'Wait For Approval From Customer',
+        1 => 'Pending Booking Fee',
+        2 => 'Wait For Payment Approval',
+        3 => 'Approved',
+        4 => 'Rejected By Customer',
+        5 => 'Payment Rejected'
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
+function getBadgeBookingStatus($status = null){
+
+    $statuses = [
+        0 => "<span class='badge badge-warning'>Wait For Approval From Customer</span>",
+        1 => "<span class='badge badge-info'>Pending Booking Fee</span>",
+        2 => "<span class='badge badge-info'>Wait For Payment Approval</span>",
+        3 => "<span class='badge badge-success'>Approved</span>",
+        4 => "<span class='badge badge-dark'>Rejected By Customer</span>",
+        5 => "<span class='badge badge-dark'>Payment Rejected</span>",
+    ];
+
+    return (isset($status))? $statuses[$status] : $statuses;
+}
+
 function getVoucherStatus($status = null){
 
     $statuses = [
@@ -81,28 +109,12 @@ function getBadgeVoucherStatus($status = null){
     return (isset($status))? $statuses[$status] : $statuses;
 }
 
-function getBookingStatus($status = null){
+function checkDir($directoryName){
 
-    $statuses = [
-        0 => 'Pending',
-        1 => 'Process',
-        2 => 'Completed',
-        3 => 'Cancelled/Rejected',
-    ];
-
-    return (isset($status))? $statuses[$status] : $statuses;
-}
-
-function getBadgeBookingStatus($status = null){
-
-    $statuses = [
-        0 => "<span class='badge badge-warning'>Pending</span>",
-        1 => "<span class='badge badge-info'>Process</span>",
-        2 => "<span class='badge badge-success'>Completed</span>",
-        3 => "<span class='badge badge-dark'>Cancelled/Rejected</span>",
-    ];
-
-    return (isset($status))? $statuses[$status] : $statuses;
+    if(!is_dir($directoryName)){
+        //Directory does not exist, so lets create it.
+        mkdir($directoryName, 0755);
+    }
 }
 
 function getRank($rank = null){
