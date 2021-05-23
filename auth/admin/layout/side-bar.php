@@ -4,9 +4,6 @@
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
-            <div><img class="img-60 rounded-circle" src="../../assets/images/user/1.jpg" alt="#">
-                <div class="profile-edit"><a href="edit-profile.html" target="_blank"><i data-feather="edit"></i></a></div>
-            </div>
             <h6 class="mt-3 f-14"><?=$_SESSION['auth']['name'] ?></h6>
             <p><?=$_SESSION['auth']['role'] ?></p>
         </div>
