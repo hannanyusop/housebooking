@@ -46,7 +46,7 @@ if(isset($_GET['id'])){
         $valid_till = date('Y-m-d', strtotime($_POST['valid_till']));
         $status = ($_POST['status'] == 1)? 1 : 0;
 
-        $query = "UPDATE vouchers SET name='$name',image = '$image', balance='$balance', valid_till='$valid_till', cost='$cost',status='$status' WHERE id=$voucher_id";
+        $query = "UPDATE vouchers SET name='$name',image = '$image', valid_till='$valid_till', cost='$cost',status='$status' WHERE id=$voucher_id";
 
         if (!$db->query($query)) {
             echo "Error: " . $query . "<br>" . $db->error; exit();
