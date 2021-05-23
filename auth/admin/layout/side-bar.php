@@ -18,6 +18,11 @@
                     <i data-feather="book"></i><span>Project Management</span>
                 </a>
             </li>
+            <li>
+                <a class="sidebar-header" href="booking-index.php" class="" >
+                    <i data-feather="book"></i><span>Booking Management</span>
+                </a>
+            </li>
             <li class="">
                 <a class="sidebar-header" href="#"><i data-feather="home"></i><span>User Management</span>
                     <i class="fa fa-angle-right pull-right"></i>

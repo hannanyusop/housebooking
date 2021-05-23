@@ -83,7 +83,7 @@
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="valid_till">Valid Until</label>
-                                        <input class="datepicker-here form-control col-md-6" id="valid_till" name="valid_till" type="text">
+                                        <input class="datepicker-here form-control col-md-6" id="valid_till" name="valid_till" type="text" data-language="en">
                                     </div>
 
                                     <div class="form-group">

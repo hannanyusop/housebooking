@@ -4,7 +4,7 @@
 
 <?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM projects");
+$result = $db->query("SELECT * FROM bookings");
 ?>
 <?= include('layout/head.php'); ?>
 
@@ -27,15 +27,12 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Project Management</li>
+                                    <li class="breadcrumb-item">Booking Management</li>
                                 </ol>
                             </div>
                         </div>
                         <div class="col">
                             <div class="bookmark pull-right">
-                                <ul>
-                                    <li><a href="project-create.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Create</a> </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -48,31 +45,44 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive product-table">
-                                    <table class="display table-sm" id="datatable">
+                                    <table class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Location</th>
-                                            <th>Project Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Project</th>
+                                            <th>Type</th>
+                                            <th scope="col">Agent Name</th>
+                                            <th scope="col">Status</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $result->fetch_assoc()){ ;?>
+                                        <?php while($booking = $result->fetch_assoc()){ ;?>
+                                            <?php
+                                            $house_id = $booking['house_id'];
+
+                                            $house_q = $db->query("SELECT * FROM houses WHERE id=$house_id");
+                                            $house = $house_q->fetch_assoc();
+
+                                            $project_q = $db->query("SELECT * FROM projects WHERE id='$house[project_id]'");
+                                            $project = $project_q->fetch_assoc();
+
+                                            $agent_q = $db->query("SELECT * FROM agents WHERE id='$booking[agent_id]'");
+                                            $agent = $agent_q->fetch_assoc();
+                                            ?>
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
-                                                <td><?= strLimit($data['name'], 20); ?></td>
-                                                <td><?= strtoupper($data['location_name']) ?></td>
-                                                <td><?= $data['start']. " to ". $data['end']; ?></td>
-                                                <td><?= getProjectStatus($data['status']) ?></td>
+                                                <th scope="row">1</th>
+                                                <td><?= $project['name'] ?></td>
+                                                <td><?= getHouseType($house['type']) ?></td>
+                                                <td><?= $agent['name'] ?></td>
+                                                <td><?= getBadgeBookingStatus($booking['status']) ?></td>
                                                 <td>
-                                                    <a href="project-manage.php?id=<?= $data['id']; ?>" class="btn btn-success btn-xs">Manage</a>
-                                                    <a href="project-edit.php?id=<?= $data['id'] ?>" class="btn btn-info btn-xs">Edit</a>
+                                                    <div class="btn-group" role="group">
+                                                        <a href="booking-view.php?id=<?= $booking['id']?>" class="btn btn-success">View</a>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php }?>
                                         </tbody>
                                     </table>
                                 </div>
