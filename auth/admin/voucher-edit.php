@@ -46,9 +46,7 @@ if(isset($_GET['id'])){
         $valid_till = date('Y-m-d', strtotime($_POST['valid_till']));
         $status = ($_POST['status'] == 1)? 1 : 0;
 
-        $balance = ($voucher['balance'] < $quantity)? $quantity : $voucher['balance'];
-
-        $query = "UPDATE vouchers SET name='$name',image = '$image', quantity='$quantity', balance='$balance', valid_till='$valid_till', cost='$cost',status='$status' WHERE id=$voucher_id";
+        $query = "UPDATE vouchers SET name='$name',image = '$image', balance='$balance', valid_till='$valid_till', cost='$cost',status='$status' WHERE id=$voucher_id";
 
         if (!$db->query($query)) {
             echo "Error: " . $query . "<br>" . $db->error; exit();
@@ -113,11 +111,6 @@ if(isset($_GET['id'])){
                                         <input class="form-control col-md-6" type="file" name="image" id="image">
 
                                         <img src="<?= $voucher['image'] ?>" width="70px" alt="<?= $voucher['name'] ?>">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-form-label pt-0" for="quantity">Quantity</label>
-                                        <input class="form-control col-md-6" id="quantity" name="quantity" value="<?= $voucher['quantity'] ?>"  type="number" min="0">
                                     </div>
 
                                     <div class="form-group">

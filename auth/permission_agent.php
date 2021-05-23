@@ -14,4 +14,9 @@
 
     $user_id = $_SESSION['auth']['user_id'];
 
+    $user_q = $db->query("SELECT * FROM agents WHERE id=$user_id");
+    $user = $user_q->fetch_assoc();
+
+    $point_balance = $user['point'];
+
 ?>

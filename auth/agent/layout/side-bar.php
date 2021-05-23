@@ -10,6 +10,9 @@
             <li class="menu-header">Dashboard</li>
             <li><a class="nav-link" href="project-index.php"><i class="fas fa-building"></i> <span>Project</span></a></li>
             <li><a class="nav-link" href="booking-index.php"><i class="fas fa-fire"></i> <span>Booking</span></a></li>
+            <li><a class="nav-link" href="voucher-index.php"><i class="fas fa-fire"></i> <span>Voucher</span></a></li>
+            <li><a class="nav-link" href="voucher-my.php"><i class="fas fa-fire"></i> <span>Redeemed Voucher</span></a></li>
+
         </ul>
     </aside>
 </div>

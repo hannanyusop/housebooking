@@ -26,17 +26,17 @@
             var_dump($e);exit();
         }
 
-        $name = $_POST['name']; $quantity = $_POST['quantity']; $cost = $_POST['cost'];
+        $name = $_POST['name']; $cost = $_POST['cost'];
 
         $valid_till = date('Y-m-d', strtotime($_POST['valid_till']));
         $status = ($_POST['status'] == 1)? 1 : 0;
 
-        $vouchers = "INSERT INTO vouchers (name, image, quantity, balance, valid_till, cost, status) VALUES ('$name', '$file_location', '$quantity', '$quantity', '$valid_till', '$cost', '$status')";
+        $vouchers = "INSERT INTO vouchers (name, image, valid_till, cost, status) VALUES ('$name', '$file_location', '$valid_till', '$cost', '$status')";
 
         if (!$db->query($vouchers)) {
             echo "Error: " . $vouchers . "<br>" . $db->error; exit();
         }else{
-            echo "<script>alert('New voucher successfully created!');window.location='voucher-index.php'</script>";
+            echo "<script>alert('New ticket successfully created!');window.location='voucher-index.php'</script>";
         }
     }
 ?>
@@ -62,7 +62,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Voucher</li>
-                                    <li class="breadcrumb-item">Create</li>
+                                    <li class="breadcrumb-item">Create Ticket</li>
                                 </ol>
                             </div>
                         </div>
@@ -89,11 +89,6 @@
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="image">Image</label>
                                         <input class="form-control col-md-6" type="file" name="image" id="image"  required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-form-label pt-0" for="quantity">Quantity</label>
-                                        <input class="form-control col-md-6" id="quantity" value="0" name="quantity" type="number" min="0">
                                     </div>
 
                                     <div class="form-group">
