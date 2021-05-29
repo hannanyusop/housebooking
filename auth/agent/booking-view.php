@@ -10,6 +10,14 @@ if(isset($_GET['id'])){
 
     if(!$booking){
         echo "<script>alert('Booking not exist!');window.location='booking-index.php'</script>";
+        exit();
+    }
+
+    if(isset($_GET['cancel'])){
+        $db->query("DELETE FROM bookings WHERE id='$booking_id'");
+        echo "<script>alert('Booking deleted!');window.location='booking-index.php'</script>";
+        exit();
+
     }
 
     $house_id = $booking['house_id'];
@@ -143,7 +151,7 @@ if(isset($_GET['id'])){
                                     <div class="card-footer">
                                         <a href="booking-index.php" class="btn btn-info btn-lg">Back</a>
                                         <?php if($booking['status'] == 0){ ?>
-                                        <button type="submit" class="btn btn-danger btn-lg float-right" id="submit">Cancel Booking</button>
+                                        <a href="booking-view.php?id=<?= $booking_id ?>&cancel=true" onclick="return confirm('Are you sure want cancel and delete this booking?')" class="btn btn-danger btn-lg float-right" id="submit">Cancel Booking</a>
                                         <?php } ?>
                                     </div>
                                 </div>
