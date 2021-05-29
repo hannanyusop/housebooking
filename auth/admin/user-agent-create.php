@@ -6,12 +6,10 @@
 <?php
     if(isset($_POST['name'])){
 
-
-
         $password = password_hash("secret", PASSWORD_BCRYPT);
 
         $agents = "INSERT INTO agents (is_active, email, password, name, phone_number, rank) 
-VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]', '$_POST[rank]')";
+VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]', 0)";
         if (!$db->query($agents)) {
             echo "Error: " . $agents . "<br>" . $db->error; exit();
         }else{
@@ -26,10 +24,10 @@ VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]',
 <!-- Loader ends-->
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -54,9 +52,6 @@ VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]',
                 <div class="row">
                     <div class="col-sm-8 offset-md-2">
                         <div class="card">
-                            <div class="card-header">
-                                <h5>Add New Block</h5>
-                            </div>
                             <div class="card-body">
                                 <form class="theme-form" method="post">
                                     <div class="form-group">
@@ -72,15 +67,6 @@ VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]',
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="phone_number">Phone Number</label>
                                         <input class="form-control text-uppercase col-md-6" type="text" name="phone_number" id="phone_number" data-original-title="" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-form-label pt-0" for="rank">Rank</label>
-                                        <select name="rank" id="rank" class="form-control" required>
-                                            <?php foreach (getRank() as $key => $rank){ ?>
-                                                <option value="<?= $key ?>"><?= $rank ?></option>
-                                            <?php } ?>
-                                        </select>
                                     </div>
 
                                     <div class="form-group">

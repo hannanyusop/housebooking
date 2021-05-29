@@ -42,12 +42,12 @@ if(isset($_GET['id'])){
         if($_GET['approve'] == 'true'){
 
             $point = $house['point'];
+            $rank = $agent['rank']+1;
             $update = $db->query("UPDATE bookings SET status=3,point_gain=$point WHERE id=$booking_id");
 
             $agent_point = $agent['point']+$point;
             $agent_total_point = $agent['total_point']+$point;
-            $update_agent = $db->query("UPDATE agents SET total_point=$agent_total_point, point=$agent_point WHERE id='$agent[id]'");
-
+            $update_agent = $db->query("UPDATE agents SET total_point=$agent_total_point, point=$agent_point,rank=$rank WHERE id='$agent[id]'");
             echo "<script>alert('Booking approved!');window.location='booking-view.php?id=$booking_id'</script>";
         }else{
 
@@ -83,7 +83,7 @@ if(isset($_GET['id'])){
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Booking Management</li>
+                                    <li class="breadcrumb-item"><a href="booking-index.php">Booking Management</a> </li>
                                 </ol>
                             </div>
                         </div>
@@ -203,5 +203,4 @@ if(isset($_GET['id'])){
 </body>
 
 <?php include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
 </html>

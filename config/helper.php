@@ -125,24 +125,24 @@ function getRank($rank){
 
 
     if($rank == 0){
-        return 0;
+        return "<i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
     }else if($rank <= 1){
-        return 1;
+        return "<i class='fas fa-star text-warning'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
     }elseif ($rank > 1 && $rank < 9){
-        return 2;
+        return "<i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
     }elseif ($rank >= 9 && $rank < 16){
-        return 3;
+        return "<i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star'></i><i class='fas fa-star'></i>";
     }elseif ($rank >= 16 && $rank < 25){
-        return 4;
+        return "<i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star'></i>";
     }else{
-        return 5;
+        return "<i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i><i class='fas fa-star text-warning'></i>";
     }
 
 }
 
 function getStar(){
 
-
+    return "<i class='ion ion-ios-star'></i>";
 }
 function getBackendRole($role_id = null){
 

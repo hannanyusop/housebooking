@@ -7,6 +7,7 @@
 <script src="../../asset/js/stisla.js"></script>
 
 <!-- JS Libraies -->
+<script src="../../asset/modules/chart.min.js"></script>
 <script src="../../asset/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 <!-- Page Specific JS File -->
 

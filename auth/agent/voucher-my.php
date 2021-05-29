@@ -22,33 +22,6 @@ $no = 1;
                 </div>
 
                 <div class="section-body">
-
-                    <div class="d-flex justify-content-center bd-highlight mb-3">
-                        <div class="col-lg-6 col-md-4 col-sm-12">
-                            <div class="card card-statistic-2">
-                                <div class="card-stats">
-                                    <div class="card-stats-title">Voucher Statistics</div>
-                                    <div class="card-stats-items">
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count"><?= $count ?></div>
-                                            <div class="card-stats-item-label">Redeemed Voucher</div>
-                                        </div>
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count"><?=displayPoint($point_balance) ?></div>
-                                            <div class="card-stats-item-label">Balance Point</div>
-                                        </div>
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count"><?=displayPoint($point_balance) ?></div>
-                                            <div class="card-stats-item-label">Total Point</div>
-                                        </div>
-                                    </div>
-
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">

@@ -81,7 +81,7 @@
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
-                                                <td><?= strtoupper($data['rank']) ?></td>
+                                                <td><small><?= getRank($data['rank']) ?></small></td>
                                                 <td><?= $data['email']; ?></td>
                                                 <td><?= $data['phone_number']; ?></td>
                                                 <td><?= ($data['is_active'] == 0)? "<span class='badge badge-dark'>Inactive</span>" : "<span class='badge badge-success'>Active</span>"; ?></td>

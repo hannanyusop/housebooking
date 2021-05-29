@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/flag-icon.css">
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/feather-icon.css">
+    <link rel="stylesheet" href="../../asset/modules/fontawesome/css/all.min.css">
 
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.css">

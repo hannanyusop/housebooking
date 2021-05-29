@@ -11,7 +11,7 @@
                 <div class="d-sm-none d-lg-inline-block"></div></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Hi, <?=$_SESSION['auth']['name'] ?></div>
-                <a href="#" class="dropdown-item has-icon">
+                <a href="profile.php" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
