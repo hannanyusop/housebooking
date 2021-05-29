@@ -24,13 +24,13 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table booking_house.admin: ~2 rows (approximately)
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`id`, `email`, `password`, `name`) VALUES
 	(1, 'admin@mail.com', '$2y$10$DBx1sWe3Zj7juZ7yoNIx3.oxJZnaodu5aQyoVoCVhySiMdRpkUlCm', 'ADMIN ACCOUNT'),
-	(2, 'qikiqah@mailinator.com', '$2y$10$bZMPCGSfBuWScZ9X/6ZBn.UZ1Apc67CUmWHvW2ZOol20zypXgkjmO', 'Fuller Trujillo');
+	(3, 'asda@mail.com', '$2y$10$pN5LPM7u56R4Ly8ha99.buyw5vbw4bFrIgjhwtALkudk57wqnBlV.', 'test');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 -- Dumping structure for table booking_house.agents
@@ -43,18 +43,19 @@ CREATE TABLE IF NOT EXISTS `agents` (
   `phone_number` varchar(255) NOT NULL,
   `total_point` int(11) DEFAULT '0',
   `point` int(11) DEFAULT '0',
-  `rank` varchar(255) NOT NULL,
+  `rank` int(11) NOT NULL DEFAULT '0',
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table booking_house.agents: ~3 rows (approximately)
 /*!40000 ALTER TABLE `agents` DISABLE KEYS */;
 INSERT INTO `agents` (`id`, `is_active`, `email`, `password`, `name`, `phone_number`, `total_point`, `point`, `rank`, `deleted_at`) VALUES
-	(1, 1, 'agent@mail.com', '$2y$10$DBx1sWe3Zj7juZ7yoNIx3.oxJZnaodu5aQyoVoCVhySiMdRpkUlCm', 'AGENT ACCOUNT', '0123456789', 0, 0, 'junior', NULL),
-	(2, 1, 'syafiq@mailinator.com', '$2y$10$8fv2qdP543kXf/8Xdu9tbOlaFUZLf5Jz2Ei.ZKg/PjevaNRdaKivm', 'SYAFIQ', '34545', 0, 0, 'senior', NULL),
-	(3, 1, 'bugagykytu@mailinator.com', '$2y$10$nseP4vXnqoAU9yE1LGfKkuuN4rRbjFiwYN9b1MaHreqwhSeoOSuJm', 'Charity Rocha', '+1 (605) 292-4092', 0, 0, 'senior', NULL);
+	(1, 1, 'agent@mail.com', '$2y$10$DBx1sWe3Zj7juZ7yoNIx3.oxJZnaodu5aQyoVoCVhySiMdRpkUlCm', 'AGENT ACCOUNT', '0123456789', 600, 500, 2, NULL),
+	(2, 1, 'syafiq@mailinator.com', '$2y$10$8fv2qdP543kXf/8Xdu9tbOlaFUZLf5Jz2Ei.ZKg/PjevaNRdaKivm', 'SYAFIQ', '34545', 0, 0, 0, NULL),
+	(3, 1, 'bugagykytu@mailinator.com', '$2y$10$nseP4vXnqoAU9yE1LGfKkuuN4rRbjFiwYN9b1MaHreqwhSeoOSuJm', 'Charity Rocha', '+1 (605) 292-4092', 0, 0, 0, NULL),
+	(4, 1, 'pexagu@mailinator.com', '$2y$10$88GBPvpdg.SviJ2W6uDBWuu8MK5jC8XUl.wf8JaKOAiXJpE178LVG', 'Kenneth Armstrong', '+1 (256) 482-1429', 0, 0, 0, NULL);
 /*!40000 ALTER TABLE `agents` ENABLE KEYS */;
 
 -- Dumping structure for table booking_house.bookings
@@ -67,14 +68,17 @@ CREATE TABLE IF NOT EXISTS `bookings` (
   `code` varchar(50) DEFAULT NULL,
   `point_gain` int(11) NOT NULL DEFAULT '0',
   `remark` longtext NOT NULL,
+  `receipt` varchar(50) DEFAULT NULL,
+  `admin_remark` longtext NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table booking_house.bookings: ~1 rows (approximately)
+-- Dumping data for table booking_house.bookings: ~2 rows (approximately)
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` (`id`, `house_id`, `agent_id`, `customer_id`, `status`, `code`, `point_gain`, `remark`, `created_at`) VALUES
-	(1, 1, 1, 2, 0, '24022', 0, ' hannan test', '2021-05-06 15:03:05');
+INSERT INTO `bookings` (`id`, `house_id`, `agent_id`, `customer_id`, `status`, `code`, `point_gain`, `remark`, `receipt`, `admin_remark`, `created_at`) VALUES
+	(1, 1, 1, 2, 3, '24022', 200, ' hannan test', '../../assets/uploads/receipt/1621760535.png', '', '2021-05-06 15:03:05'),
+	(2, 1, 1, 2, 2, '36286', 0, ' ', '../../assets/uploads/receipt/1621760535.png', '', '2021-05-06 17:03:14');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 
 -- Dumping structure for table booking_house.customers
@@ -105,10 +109,14 @@ CREATE TABLE IF NOT EXISTS `houses` (
   `price` double(10,2) NOT NULL DEFAULT '0.00',
   `point` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table booking_house.houses: ~0 rows (approximately)
+-- Dumping data for table booking_house.houses: ~2 rows (approximately)
 /*!40000 ALTER TABLE `houses` DISABLE KEYS */;
+INSERT INTO `houses` (`id`, `project_id`, `current_booking_id`, `name`, `type`, `price`, `point`) VALUES
+	(1, 1, NULL, 'Lot 1', '3', 180000.00, 200),
+	(2, 1, NULL, 'Lot 2', '3', 180000.00, 200),
+	(3, 1, NULL, 'Lot 3', '3', 230000.00, 250);
 /*!40000 ALTER TABLE `houses` ENABLE KEYS */;
 
 -- Dumping structure for table booking_house.notifications
@@ -131,18 +139,18 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
-  `location_coordinate` varchar(50) NOT NULL,
   `location_name` varchar(255) NOT NULL DEFAULT '',
   `start` date NOT NULL,
   `end` date NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table booking_house.projects: ~1 rows (approximately)
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` (`id`, `name`, `location_coordinate`, `location_name`, `start`, `end`, `status`) VALUES
-	(1, 'RUmah mesra rakyat', '1.232,0.234', 'Location Name example', '2021-05-04', '2021-10-23', 1);
+INSERT INTO `projects` (`id`, `name`, `location_name`, `start`, `end`, `status`) VALUES
+	(1, 'RUmah mesra rakyat', 'Location Name example', '2021-05-08', '2021-05-20', 2),
+	(2, 'testing', 'Location Name example', '2021-05-02', '2021-05-15', 1);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 
 -- Dumping structure for table booking_house.project_brochures
@@ -152,11 +160,52 @@ CREATE TABLE IF NOT EXISTS `project_brochures` (
   `title` varchar(255) NOT NULL DEFAULT '',
   `file_location` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table booking_house.project_brochures: ~0 rows (approximately)
+-- Dumping data for table booking_house.project_brochures: ~2 rows (approximately)
 /*!40000 ALTER TABLE `project_brochures` DISABLE KEYS */;
+INSERT INTO `project_brochures` (`id`, `project_id`, `title`, `file_location`) VALUES
+	(1, 1, 'entrance', '../../assets/uploads/1620291601.jpg'),
+	(2, 1, 'semi D', '../../assets/uploads/1620291621.jpg'),
+	(3, 1, 'Bunglow', '../../assets/uploads/1620291633.jpg');
 /*!40000 ALTER TABLE `project_brochures` ENABLE KEYS */;
+
+-- Dumping structure for table booking_house.vouchers
+CREATE TABLE IF NOT EXISTS `vouchers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `valid_till` date DEFAULT NULL,
+  `cost` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table booking_house.vouchers: ~1 rows (approximately)
+/*!40000 ALTER TABLE `vouchers` DISABLE KEYS */;
+INSERT INTO `vouchers` (`id`, `name`, `image`, `valid_till`, `cost`, `status`, `is_deleted`) VALUES
+	(1, 'Test', '../../assets/uploads/voucher/1622280731.png', '2021-05-14', 100, 1, 0);
+/*!40000 ALTER TABLE `vouchers` ENABLE KEYS */;
+
+-- Dumping structure for table booking_house.voucher_claims
+CREATE TABLE IF NOT EXISTS `voucher_claims` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `voucher_id` int(11) NOT NULL,
+  `code` varchar(50) DEFAULT NULL,
+  `agent_id` int(11) DEFAULT NULL,
+  `claim_at` datetime DEFAULT NULL,
+  `cost` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table booking_house.voucher_claims: ~2 rows (approximately)
+/*!40000 ALTER TABLE `voucher_claims` DISABLE KEYS */;
+INSERT INTO `voucher_claims` (`id`, `voucher_id`, `code`, `agent_id`, `claim_at`, `cost`) VALUES
+	(1, 1, '0ZYU7VGN', 1, '2021-05-29 18:13:27', 0),
+	(2, 1, 'WEH5RLVZ', NULL, NULL, 0);
+/*!40000 ALTER TABLE `voucher_claims` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
