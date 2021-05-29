@@ -55,7 +55,7 @@ $project_count = $result->num_rows;
                                                 <td><?= $project['name'] ?></td>
                                                 <td><?= getHouseType($house['type']) ?></td>
                                                 <td><?= $agent['name'] ?></td>
-                                                <td><?= getBadgeProjectStatus($booking['status']) ?></td>
+                                                <td><?= getBadgeBookingStatus($booking['status']) ?></td>
                                                 <td>
                                                     <div class="btn-group" role="group">
                                                         <a href="booking-view.php?id=<?= $booking['id']?>" class="btn btn-success">View</a>

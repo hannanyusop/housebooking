@@ -46,25 +46,25 @@ require_once '../env.php';
             echo "<script>window.location='register-success.php?email=".$_POST['email']."'</script>";
             #add customer account
 
-//
-//            $body = "Hello $name,<br><br>
-//            <p>This email has been registered to e-centerprinting.my.<br>Password: $_POST[password]<br><br>Please change this password to keep your account safe.
-//             If you not request this, please call Customer Service 06-425635654543 or drop an email at help@ecp.my</p>
-//
-//            <br><br>
-//            <small>
-//                <i>This email was generated automatically by system. Don't reply this email
-//                    <br>For inquiry please call our Customer Service 06-425635654543</i>
-//            </small>
-//            <br><br>
-//            <small>
-//                <i>'To give customers the most compelling printing experience possible' <br>-(Managing Director & Founder)</i>
-//                <br>
-//            </small>";
-//
-//
-//            sendEmail($_POST['email'], "Activate ECP Account", $body);
-//            echo "<script>alert('Your account successfully registered! We\'ve send temporary password at your email');window.location='login.php '</script>";
+
+            $body = "Hello $name,<br><br>
+            <p>This email has been registered to $GLOBALS[APP_NAME].<br>Password: $_POST[password]<br><br>Please change this password to keep your account safe.
+             If you not request this, please call Customer Service 06-425635654543 or drop an email at help@ecp.my</p>
+
+            <br><br>
+            <small>
+                <i>This email was generated automatically by system. Don't reply this email
+                    <br>For inquiry please call our Customer Service 06-425635654543</i>
+            </small>
+            <br><br>
+            <small>
+                <i>'To give customers the most compelling printing experience possible' <br>-(Managing Director & Founder)</i>
+                <br>
+            </small>";
+
+
+            sendEmail($_POST['email'], "Activate $GLOBALS[APP_NAME] Account", $body);
+            echo "<script>alert('Your account successfully registered! We have send activation link to your email');window.location='login.php '</script>";
         }
 
     }
