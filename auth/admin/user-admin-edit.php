@@ -4,24 +4,39 @@
 
 <?php include_once('../permission_admin.php') ?>
 <?php
-    if(isset($_POST['name'])){
 
+    if(isset($_GET['id'])){
 
-        $check_email_q = $db->query("SELECT * FROM admin WHERE email='$_POST[email]'");
-        $check_email   = $check_email_q->fetch_assoc();
+        $id = $_GET['id'];
 
-        if($check_email){
-            echo "<script>alert('Email already used!');window.location='user-admin-create.php'</script>";
+        $admin_q = $db->query("SELECT * FROM admin WHERE id=$id");
+        $admin = $admin_q->fetch_assoc();
+
+        if(!$admin){
+            echo "<script>alert('Invalid admin data!');window.location='user-admin-index.php'</script>";
         }
 
-        $password = password_hash("secret", PASSWORD_BCRYPT);
 
-        $admin = "INSERT INTO admin (email, password, name) VALUES ('$_POST[email]', '$password', '$_POST[name]')";
-        if (!$db->query($admin)) {
-            echo "Error: " . $admin . "<br>" . $db->error; exit();
-        }else{
-            echo "<script>alert('New admin successfully created!');window.location='user-admin-index.php'</script>";
+        if(isset($_POST['name'])){
+
+            $check_email_q = $db->query("SELECT * FROM admin WHERE email='$_POST[email]' AND id!=$id");
+            $check_email   = $check_email_q->fetch_assoc();
+
+            if($check_email){
+                echo "<script>alert('Email already used!');window.location='user-admin-edit.php?id=$id'</script>";
+            }
+
+            $update = "UPDATE admin SET email='$_POST[email]', name='$_POST[name]' WHERE id=$id";
+
+            if (!$db->query($update)) {
+                echo "Error: " . $update . "<br>" . $db->error; exit();
+            }else{
+                echo "<script>alert('Admin successfully updated!');window.location='user-admin-index.php'</script>";
+            }
         }
+
+    }else{
+        echo "<script>alert('Invalid url!');window.location='user-admin-index.php'</script>";
     }
 ?>
 <?= include('layout/head.php'); ?>
@@ -47,7 +62,7 @@
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">User Management</li>
                                     <li class="breadcrumb-item active"><a href="user-agent-index.php">Admin</a> </li>
-                                        <li class="breadcrumb-item">Create</li>
+                                    <li class="breadcrumb-item">Edit</li>
                                 </ol>
                             </div>
                         </div>
@@ -63,23 +78,18 @@
                                 <form class="theme-form" method="post">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
-                                        <input class="form-control" name="name" id="name" required>
+                                        <input class="form-control" name="name" id="name" value="<?= $admin['name'] ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="email">Email</label>
-                                        <input class="form-control col-md-6" type="email" name="email" id="email" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="col-form-label pt-0" for="password">Password</label>
-                                        <input class="form-control col-md-6" type="text" name="password" id="password" value="secret" readonly>
+                                        <input class="form-control col-md-6" type="email" name="email" id="email" value="<?= $admin['email'] ?>" required>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <a href="user-admin-index.php" class="btn btn-secondary" data-original-title="" title="">Cancel</a>
+                                            <a href="user-admin-index.php" class="btn btn-secondary">Cancel</a>
                                         </div>
                                     </div>
                                 </form>

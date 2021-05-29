@@ -5,8 +5,24 @@
 <?php include_once('../permission_admin.php') ?>
 <?php
     $result = $db->query("SELECT * FROM admin");
+
+    if(isset($_GET['delete'])){
+        $id = $_GET['delete'];
+
+        if($id == 1){
+            echo "<script>alert('This admin cannot be deleted.');window.location='user-admin-index.php'</script>";
+            exit();
+        }
+
+        if (!$db->query("DELETE FROM admin WHERE id=$id")) {
+
+            echo "Error: Deleting error<br>" . $db->error; exit();
+        }else{
+            echo "<script>alert('Admin successfully deleted!');window.location='user-admin-index.php'</script>";
+        }
+    }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
@@ -16,7 +32,7 @@
     <?= include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -66,8 +82,8 @@
                                                 <td><?= $data['email']; ?></td>
                                                 <td>
                                                     <?php if($data['id'] != 1){ ?>
-                                                        <button class="btn btn-danger btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                                                        <button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                                                        <a href="user-admin-edit.php?id=<?= $data['id']; ?>" class="btn btn-warning btn-xs">Edit</a>
+                                                        <a href="user-admin-index.php?delete=<?= $data['id']; ?>"  onclick="return confirm('Are you sure want to delete this admin?')" class="btn btn-danger btn-xs">Delete</a>
                                                     <?php } ?>
                                                 </td>
                                             </tr>
