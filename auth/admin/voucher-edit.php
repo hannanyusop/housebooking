@@ -59,20 +59,15 @@ if(isset($_GET['id'])){
     echo "<script>alert('Invalid parameter!');window.location='voucher-index.php';</script>";
 }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
-
-<!-- Loader ends-->
-<!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
-            <!-- breadcrumb  Start -->
             <div class="container-fluid">
                 <div class="page-header">
                     <div class="row">
@@ -80,8 +75,8 @@ if(isset($_GET['id'])){
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Voucher</li>
-                                    <li class="breadcrumb-item">Create</li>
+                                    <li class="breadcrumb-item"><a href="voucher-index.php">Voucher</a></li>
+                                    <li class="breadcrumb-item">Edit</li>
                                 </ol>
                             </div>
                         </div>
@@ -97,7 +92,7 @@ if(isset($_GET['id'])){
                                 <form class="theme-form" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
-                                        <input class="form-control text-uppercase" name="name" id="name" value="<?= $voucher['name'] ?>" required>
+                                        <input class="form-control" name="name" id="name" value="<?= $voucher['name'] ?>" required>
                                     </div>
 
                                     <div class="form-group">
@@ -140,18 +135,10 @@ if(isset($_GET['id'])){
                     </div>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
-        <!-- footer end-->
+        <?php include('layout/footer.php'); ?>
     </div>
-    <!-- Page Body End-->
 </div>
-<!-- latest jquery-->
-
 </body>
-
 <?= include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
 </html>

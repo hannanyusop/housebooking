@@ -23,11 +23,16 @@ $GLOBALS['APP_NAME'] = 'HOUSE BOOKING SYSTEM';
 $GLOBALS['SHORT NAME'] = 'HBS';
 
 #PHP Mailer
-//ecenterprinting
 $GLOBALS['smtp_username'] = 'ecenterprinting@yahoo.com';
-$GLOBALS['smtp_password'] = '';
+$GLOBALS['smtp_password'] = 'idwfwfybfmqgkgfc';
 $GLOBALS['smtp_host'] = 'smtp.mail.yahoo.com';
 $GLOBALS['admin_email'] = 'ecenterprinting@yahoo.com';
+
+#go to this link https://temp-mail.org/en/ and get temp email for testing
+
+$GLOBALS['email_test'] = 'fivolam705@isecv.com';
+$GLOBALS['env'] = 'development'; # 'production' / 'development'
+$GLOBALS['email_debug'] = true; # true / false
 
 $GLOBALS['xampp_macos'] = true;
 $GLOBALS['send_email'] = true;

@@ -4,7 +4,8 @@
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
-            <h6 class="mt-3 f-14"><?=$_SESSION['auth']['name'] ?></h6>
+                <img class="img-60 rounded-circle" src="<?= generateUIAvatar($_SESSION['auth']['name']) ?>">
+                <h6 class="mt-3 f-14"><?=$_SESSION['auth']['name'] ?></h6>
             <p><?=$_SESSION['auth']['role'] ?></p>
         </div>
         <ul class="sidebar-menu">

@@ -45,17 +45,11 @@
 <?= include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
-
-<!-- Loader ends-->
-<!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
-
+        <?php include('layout/side-bar.php'); ?>
         <div class="page-body">
-            <!-- breadcrumb  Start -->
             <div class="container-fluid">
                 <div class="page-header">
                     <div class="row">
@@ -69,11 +63,6 @@
                             </div>
                         </div>
                         <div class="col">
-<!--                            <div class="bookmark pull-right">-->
-<!--                                <ul>-->
-<!--                                    <li><a href="data-block-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Customer</a> </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -122,18 +111,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
-        <!-- footer end-->
+        <?php include('layout/footer.php'); ?>
     </div>
-    <!-- Page Body End-->
 </div>
-<!-- latest jquery-->
-
 </body>
 
-<?= include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
+<?php include('layout/script.php'); ?>
 </html>
