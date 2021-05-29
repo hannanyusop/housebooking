@@ -50,7 +50,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 'role' => 'agent'
             ];
 
-            header('Location:agent/index.php');
+            header('Location:agent/booking-index.php');
 
         }else{
             echo "<script>alert('Invalid Password!');window.location='login.php'</script>";
