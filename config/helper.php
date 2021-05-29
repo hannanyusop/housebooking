@@ -118,17 +118,31 @@ function checkDir($directoryName){
 }
 
 function generateUIAvatar($name){
-    return "https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=".$name;
+    return "https://ui-avatars.com/api/?background=0b96b5&color=fff&name=".$name;
 }
 
-function getRank($rank = null){
+function getRank($rank){
 
-    $ranks = [
-        'junior' => 'JUNIOR',
-        'senior' => 'SENIOR'
-    ];
 
-    return (isset($rank))? $ranks[$rank] : $ranks;
+    if($rank == 0){
+        return 0;
+    }else if($rank <= 1){
+        return 1;
+    }elseif ($rank > 1 && $rank < 9){
+        return 2;
+    }elseif ($rank >= 9 && $rank < 16){
+        return 3;
+    }elseif ($rank >= 16 && $rank < 25){
+        return 4;
+    }else{
+        return 5;
+    }
+
+}
+
+function getStar(){
+
+
 }
 function getBackendRole($role_id = null){
 
