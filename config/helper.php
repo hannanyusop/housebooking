@@ -194,7 +194,7 @@ function sendEmail($recipient_email, $title = "", $body){
             $mail->Port       = 587;
 
             //Recipients
-            $mail->setFrom('noreply@utem.edu.my', 'nor-reply');
+            $mail->setFrom('ecenterprinting@yahoo.com', 'nor-reply');
 
             if($GLOBALS['env'] == 'development'){
                 $mail->addAddress($GLOBALS['email_test']);

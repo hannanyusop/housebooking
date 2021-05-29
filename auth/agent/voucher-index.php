@@ -33,7 +33,7 @@ if(isset($_GET['redeem'])){
         $ticket_id = $ticket['id'];
 
         $new_balance = $point_balance-$voucher['cost'];
-        $update_ticket = $db->query("UPDATE voucher_claims SET agent_id=$user_id,claim_at=NOW() WHERE id=$ticket_id");
+        $update_ticket = $db->query("UPDATE voucher_claims SET agent_id=$user_id,claim_at=NOW(),cost=$voucher[cost] WHERE id=$ticket_id");
         $update_user = $db->query("UPDATE agents SET point=$new_balance WHERE id=$user_id");
 
         echo "<script>alert('Redeemtion successfully!');window.location='voucher-index.php'</script>";

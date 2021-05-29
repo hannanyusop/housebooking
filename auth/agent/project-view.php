@@ -116,7 +116,7 @@ if(isset($_GET['id'])){
                                                         <?php if(is_null($house['current_booking_id'])){ ?>
                                                             <a href="project-booking-create.php?house_id=<?= $house['id'] ?>" class="btn btn-success">Add To Booking List</a>
                                                         <?php }else{ ?>
-                                                            <a href="" class="btn btn-info">Review Booking</a>
+                                                            <a href="booking-review.php?id=<?=$house['current_booking_id'] ?>" class="btn btn-info">Review Booking</a>
                                                         <?php } ?>
 
                                                     </div>

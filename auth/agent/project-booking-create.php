@@ -21,11 +21,27 @@ if(isset($_GET['house_id'])){
 
         $code = rand(11111,99999);
 
+        $customer_q = $db->query("SELECT * FROM customers WHERE id='$_POST[customer_id]'");
+        $customer = $customer_q->fetch_assoc();
+
         $booking = "INSERT INTO bookings (house_id,agent_id,customer_id,status,code,point_gain, remark, created_at) VALUES ('$house[id]', $user_id, '$_POST[customer_id]', 0, '$code', 0, '$_POST[remark]', NOW())";
         if (!$db->query($booking)) {
             echo "Error: " . $booking . "<br>" . $db->error; exit();
         }else{
 
+            $body = "Hye $customer[name],<br><br>
+            <p>Please use this code to approve project</p>
+            <p>CODE: $code</p>
+            <p>PROJECT : $project[name]</p>
+            <p>LOT : $house[name]</p>
+
+            <br><br>
+            <small>
+                <i>This email was generated automatically by system. Don't reply this email
+                    <br>For inquiry please call our Customer Service 06-425635654543</i>
+            </small>";
+
+            sendEmail($customer['email'], "BOOKING CODE", $body);
             $last_id = $db->insert_id;
             echo "<script>alert('New project successfully created!');window.location='booking-view.php?id=".$last_id."'</script>";
         }

@@ -44,6 +44,7 @@ if(isset($_GET['id'])){
             $point = $house['point'];
             $rank = $agent['rank']+1;
             $update = $db->query("UPDATE bookings SET status=3,point_gain=$point WHERE id=$booking_id");
+            $db->query("UPDATE houses SET current_booking_id=$booking_id WHERE id=$house[id]");
 
             $agent_point = $agent['point']+$point;
             $agent_total_point = $agent['total_point']+$point;
