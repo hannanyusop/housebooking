@@ -11,7 +11,7 @@ require_once '../env.php';
 
             #check if mail is valid
             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                echo "<script>alert('Ops! invalid password!');window.location='register.php '</script>";
+                echo "<script>alert('Ops! invalid email format!');window.location='register.php '</script>";
                 exit();
             }
 

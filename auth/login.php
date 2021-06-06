@@ -8,7 +8,7 @@
             <div class="col-md-12">
               <div class="auth-innerright">
                 <div class="authentication-box">
-                  <div class="text-center"><img src="../assets/images/endless-logo.png" alt=""></div>
+                  <div class="text-center"><img width="200px" src="../assets/images/endless-logo.png" alt=""></div>
                   <div class="card mt-4">
                     <div class="card-body">
                       <div class="text-center">

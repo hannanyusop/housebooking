@@ -14,6 +14,9 @@
                 <a href="profile.php" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
+                <a href="profile-update.php" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> Update Profile
+                </a>
                 <div class="dropdown-divider"></div>
                 <a href="../logout.php" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
