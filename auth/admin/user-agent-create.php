@@ -56,17 +56,17 @@ VALUES (1, '$_POST[email]', '$password', '$_POST[name]', '$_POST[phone_number]',
                                 <form class="theme-form" method="post">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
-                                        <input class="form-control text-uppercase" name="name" id="name" data-original-title="" required>
+                                        <input class="form-control" name="name" id="name" data-original-title="" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="email">Email</label>
-                                        <input class="form-control text-uppercase col-md-6" type="email" name="email" id="email" data-original-title="" required>
+                                        <input class="form-control col-md-6" type="email" name="email" id="email" data-original-title="" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="phone_number">Phone Number</label>
-                                        <input class="form-control text-uppercase col-md-6" type="text" name="phone_number" id="phone_number" data-original-title="" required>
+                                        <input class="form-control col-md-6" type="text" name="phone_number" id="phone_number" data-original-title="" required>
                                     </div>
 
                                     <div class="form-group">

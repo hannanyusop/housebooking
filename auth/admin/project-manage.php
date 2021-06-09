@@ -21,8 +21,8 @@
 
         if(isset($_POST['add_house'])){
 
-            $insert_house = "INSERT INTO houses (project_id, current_booking_id, name, type, price, point) 
-VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_POST[point]')";
+            $insert_house = "INSERT INTO houses (project_id, current_booking_id, name, type, price, point,description) 
+VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_POST[point]', '$_POST[description]')";
 
             if (!$db->query($insert_house)) {
                 echo "Error: " . $insert_house . "<br>" . $db->error; exit();
@@ -42,12 +42,12 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                 echo "<script>alert('House not exist!');window.location='project-manage.php?id=$project_id'</script>";
             }
 
-            $update_house = "UPDATE houses SET name='$_POST[name]', price='$_POST[price]',type='$_POST[type]',point='$_POST[point]' WHERE project_id='$_GET[id]' AND id='$house_id'";
+            $update_house = "UPDATE houses SET name='$_POST[name]', price='$_POST[price]',type='$_POST[type]',point='$_POST[point]', description='$_POST[description]' WHERE project_id='$_GET[id]' AND id='$house_id'";
 
             if (!$db->query($update_house)) {
                 echo "Error: " . $update_house . "<br>" . $db->error; exit();
             }else{
-                echo "<script>alert('House successfully udpated!');window.location='project-manage.php?id=$project_id'</script>";
+                echo "<script>alert('House successfully updated!');window.location='project-manage.php?id=$project_id'</script>";
             }
 
         }
@@ -223,7 +223,7 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                                                         <td><?= strLimit($house['name'], 20); ?></td>
                                                         <td><?= strLimit(getHouseType($house['type']), 20); ?></td>
                                                         <td><?= displayPrice($house['price']); ?></td>
-                                                        <td class="text-center"><?= (is_null($house['current_booking_id'])) ? " - " : $house['current_booking_id'] ?></td>
+                                                        <td class="text-center"><?= (is_null($house['current_booking_id'])) ? " - " : "Booked" ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#house<?= $house['id']; ?>">Edit</a>
                                                             <?php if($house['current_booking_id'] == NULL){ ?>
@@ -245,6 +245,11 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                                                                                         <input class="form-control" id="name" name="name" type="text" value="<?=$house['name'] ?>" required>
                                                                                         <input type="hidden" name="house_id" value="<?= $house['id']; ?>">
                                                                                         <small class="form-text text-muted" id="nameHelp"></small>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-form-label pt-0" for="description">Description</label>
+                                                                                        <textarea class="form-control" name="description" rows="5" id="description" required><?= $house['description']; ?></textarea>
                                                                                     </div>
 
                                                                                     <div class="form-group">
@@ -293,6 +298,11 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                                                 <label class="col-form-label pt-0" for="name">Name</label>
                                                 <input class="form-control" id="name" name="name" type="text" required>
                                                 <small class="form-text text-muted" id="nameHelp"></small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-form-label pt-0" for="description">Description</label>
+                                                <textarea class="form-control" name="description" rows="5" id="description" required></textarea>
                                             </div>
 
                                             <div class="form-group">

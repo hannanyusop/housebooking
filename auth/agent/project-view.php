@@ -112,6 +112,11 @@ if(isset($_GET['id'])){
                                                         Point Reward : <?= $house['point'] ?>
                                                     </div>
 
+                                                    <p>
+                                                        Description :<br>
+                                                        <small c class="font-weight-bold"><?= $house['description'] ?></small>
+                                                    </p>
+
                                                     <div class="mt-4 text-center">
                                                         <?php if(is_null($house['current_booking_id'])){ ?>
                                                             <a href="project-booking-create.php?house_id=<?= $house['id'] ?>" class="btn btn-success">Add To Booking List</a>

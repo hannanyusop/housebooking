@@ -11,8 +11,8 @@
         $start =  date('Y/m/d', strtotime($dateStr[0]));
         $end =  date('Y/m/d', strtotime($dateStr[1]));
 
-        $project = "INSERT INTO projects (name,location_name,start,end,status) 
-VALUES ('$_POST[name]', '$_POST[location_name]', '$start', '$end', '$_POST[status]')";
+        $project = "INSERT INTO projects (name,location_name,start,end,status, description) 
+VALUES ('$_POST[name]', '$_POST[location_name]', '$start', '$end', '$_POST[status]', '$_POST[description]')";
         if (!$db->query($project)) {
             echo "Error: " . $project . "<br>" . $db->error; exit();
         }else{
@@ -65,13 +65,18 @@ VALUES ('$_POST[name]', '$_POST[location_name]', '$start', '$end', '$_POST[statu
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="col-form-label pt-0" for="description">Description</label>
+                                        <textarea class="form-control" name="description" rows="5" id="description" required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-form-label pt-0" for="date">Project Duration</label>
                                         <input class="datepicker-here form-control digits col-md-6" id="date" name="date" type="text" data-range="true" data-multiple-dates-separator=" - " data-language="en">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="location_name">Location Name</label>
-                                        <textarea class="form-control text-uppercase" name="location_name" rows="5" id="location_name" data-original-title="" required>Location Name example</textarea>
+                                        <textarea class="form-control" name="location_name" rows="5" id="location_name" data-original-title="" required>Location Name example</textarea>
                                     </div>
 
                                     <div class="form-group">

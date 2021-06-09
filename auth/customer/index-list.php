@@ -110,7 +110,7 @@ if(isset($_GET['id'])){
                                 <div class="row">
                                     <?php if ($houses->num_rows > 0){ ?>
                                     <?php while($house = $houses->fetch_assoc()){ ;?>
-                                        <div class="col-12 col-md-4 col-lg-4" >
+                                        <div class="col-12 col-md-6 col-lg-6" >
                                             <div class="pricing">
                                                 <div class="pricing-title">
                                                     <?php if(is_null($house['current_booking_id'])){ ?>
@@ -130,6 +130,10 @@ if(isset($_GET['id'])){
                                                             <div class="pricing-item-label"> Type : <?= getHouseType($house['type'])?></div>
                                                         </div>
                                                     </div>
+                                                    <p>
+                                                        Description :<br>
+                                                        <small c class="font-weight-bold"><?= $house['description'] ?></small>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

@@ -28,7 +28,7 @@ if(isset($_GET['id'])){
         $start =  date('Y/m/d', strtotime($dateStr[0]));
         $end =  date('Y/m/d', strtotime($dateStr[1]));
 
-        $project = "UPDATE projects SET name='$_POST[name]', location_name = '$_POST[location_name]', start='$start', end='$end' ,status='$_POST[status]'";
+        $project = "UPDATE projects SET name='$_POST[name]',description='$_POST[description]', location_name = '$_POST[location_name]', start='$start', end='$end' ,status='$_POST[status]' WHERE id=$project_id";
 
         if (!$db->query($project)) {
             echo "Error: " . $project . "<br>" . $db->error; exit();
@@ -84,13 +84,18 @@ if(isset($_GET['id'])){
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="col-form-label pt-0" for="description">Description</label>
+                                        <textarea class="form-control" name="description" rows="5" id="description" required><?= $project['description']?></textarea>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-form-label pt-0" for="date">Project Duration</label>
                                         <input class="datepicker-here form-control digits col-md-6" id="date" name="date" type="text" data-range="true" value="<?= $reformat?>" data-multiple-dates-separator=" - " data-language="en">
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="location_name">Location Name</label>
-                                        <textarea class="form-control text-uppercase" name="location_name" rows="5" id="location_name" required><?= $project['location_name']?></textarea>
+                                        <textarea class="form-control" name="location_name" rows="5" id="location_name" required><?= $project['location_name']?></textarea>
                                     </div>
 
                                     <div class="form-group">

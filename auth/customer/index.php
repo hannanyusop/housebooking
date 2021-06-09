@@ -86,6 +86,11 @@ $project_count = $result->num_rows;
                                             <li>Project Location : <?= $project['location_name'] ?></li>
                                         </ul>
 
+                                        <p>
+                                            Description :<br>
+                                            <small class="font-weight-bold"><?= $project['description'] ?></small>
+                                        </p>
+
                                         <div class="gallery gallery-md">
                                             <?php while($brochure = $brochures->fetch_assoc()){ ;?>
                                                 <div class="gallery-item" data-image="<?= $brochure['file_location'] ?>" data-title="<?= $brochure['file_location'] ?>" href="<?= $brochure['file_location'] ?>" title="Image 1" style="background-image: url(&quot;<?= $brochure['file_location'] ?>&quot;);"></div>

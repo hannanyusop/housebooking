@@ -54,20 +54,28 @@
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Location</th>
-                                            <th>Project Date</th>
+                                            <th>Available</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php while($data = $result->fetch_assoc()){ ;?>
+                                            <?php
+                                                $total_q = $db->query("SELECT * FROM houses WHERE project_id='$data[id]'");
+                                                $total = $total_q->num_rows;
+                                                $available_q = $db->query("SELECT * FROM houses WHERE current_booking_id IS NULL AND project_id='$data[id]'");
+                                                $available = $available_q->num_rows;
+
+                                            ?>
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
                                                 <td><?= strtoupper($data['location_name']) ?></td>
-                                                <td><?= $data['start']. " to ". $data['end']; ?></td>
+                                                <td><?= $available ." / ".$total ?></td>
                                                 <td><?= getProjectStatus($data['status']) ?></td>
                                                 <td>
+                                                    <a href="project-summary.php?id=<?= $data['id']; ?>" class="btn btn-outline-dark btn-xs">Summary</a>
                                                     <a href="project-manage.php?id=<?= $data['id']; ?>" class="btn btn-success btn-xs">Manage</a>
                                                     <a href="project-edit.php?id=<?= $data['id'] ?>" class="btn btn-info btn-xs">Edit</a>
                                                 </td>
