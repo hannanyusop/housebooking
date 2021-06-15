@@ -19,40 +19,6 @@
         $brochures = $db->query("SELECT * FROM project_brochures where project_id = $project_id");
 
 
-        if(isset($_POST['add_house'])){
-
-            $insert_house = "INSERT INTO houses (project_id, current_booking_id, name, type, price, point,description) 
-VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_POST[point]', '$_POST[description]')";
-
-            if (!$db->query($insert_house)) {
-                echo "Error: " . $insert_house . "<br>" . $db->error; exit();
-            }else{
-                echo "<script>alert('New house successfully created!');window.location='project-manage.php?id=$project_id'</script>";
-            }
-        }
-
-        if(isset($_POST['edit_house'])){
-
-            $house_id = $_POST['house_id'];
-
-            $house_q = $db->query("SELECT * FROM houses WHERE project_id='$_GET[id]' AND id='$house_id'");
-            $house = $house_q->fetch_assoc();
-
-            if(!$house){
-                echo "<script>alert('House not exist!');window.location='project-manage.php?id=$project_id'</script>";
-            }
-
-            $update_house = "UPDATE houses SET name='$_POST[name]', price='$_POST[price]',type='$_POST[type]',point='$_POST[point]', description='$_POST[description]' WHERE project_id='$_GET[id]' AND id='$house_id'";
-
-            if (!$db->query($update_house)) {
-                echo "Error: " . $update_house . "<br>" . $db->error; exit();
-            }else{
-                echo "<script>alert('House successfully updated!');window.location='project-manage.php?id=$project_id'</script>";
-            }
-
-        }
-
-
         if(isset($_POST['title'])){
 
             $target_dir = "../../assets/uploads/";
@@ -99,6 +65,7 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                 echo "<script>alert('Brochure successfully deleted!');window.location='project-manage.php?id=$project_id'</script>";
             }
         }
+
         if(isset($_GET['delete_house'])){
 
             $brochure_q = $db->query("SELECT * FROM houses WHERE id='$_GET[delete_house]'");
@@ -120,8 +87,9 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
         echo "<script>alert('Error : missing parameter!');window.location='project-index.php'</script>";
     }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
+<link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
 <body main-theme-layout="main-theme-layout-1">
 
 <!-- Loader ends-->
@@ -202,154 +170,54 @@ VALUES ($project_id, NULL, '$_POST[name]', '$_POST[type]', '$_POST[price]', '$_P
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="table-responsive product-table">
-                                            <table class="display table-sm" id="datatable">
-                                                <thead>
-                                                <tr class="text-center">
-                                                    <th>Id</th>
-                                                    <th>Name</th>
-                                                    <th>Type</th>
-                                                    <th>Price</th>
-                                                    <th>Booking Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php while($house = $houses->fetch_assoc()){ ;?>
-                                                    <tr>
-                                                        <td><?= $house['id']; ?></td>
-                                                        <td><?= strLimit($house['name'], 20); ?></td>
-                                                        <td><?= strLimit(getHouseType($house['type']), 20); ?></td>
-                                                        <td><?= displayPrice($house['price']); ?></td>
-                                                        <td class="text-center"><?= (is_null($house['current_booking_id'])) ? " - " : "Booked" ?></td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#house<?= $house['id']; ?>">Edit</a>
-                                                            <?php if($house['current_booking_id'] == NULL){ ?>
-                                                                <a href="project-manage.php?id=<?=$project_id?>&delete_house=<?=$house['id']?>" onclick="return confirm('Are you sure want to delete this house?')" class="btn btn-danger btn-xs" >Delete</a>
-                                                            <?php } ?>
-                                                            <div class="modal fade" id="house<?= $house['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="house<?= $house['id']; ?>" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <form method="post">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="house"><?= strLimit($house['name'], 20); ?></h5>
-                                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="theme-form">
-                                                                                    <input class="form-control" id="edit_house" name="edit_house" type="hidden" value="true">
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-form-label pt-0" for="name">Name</label>
-                                                                                        <input class="form-control" id="name" name="name" type="text" value="<?=$house['name'] ?>" required>
-                                                                                        <input type="hidden" name="house_id" value="<?= $house['id']; ?>">
-                                                                                        <small class="form-text text-muted" id="nameHelp"></small>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-form-label pt-0" for="description">Description</label>
-                                                                                        <textarea class="form-control" name="description" rows="5" id="description" required><?= $house['description']; ?></textarea>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-form-label pt-0" for="type">Type</label>
-                                                                                        <select name="type" id="type" class="form-control" required>
-                                                                                            <?php foreach (getHouseType() as $key => $type){ ?>
-                                                                                                <option value="<?= $key ?>" <?= ($house['type'] == $key)? "selected" : "" ?>><?= $type ?></option>
-                                                                                            <?php } ?>
-                                                                                        </select>
-                                                                                        <small class="form-text text-muted" id="nameHelp"></small>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-form-label pt-0" for="price">Price</label>
-                                                                                        <input class="form-control" id="price" name="price" type="text" value="<?= $house['price'] ?>" required>
-                                                                                        <small class="form-text text-muted" id="helpPrice"></small>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-form-label pt-0" for="point">Point</label>
-                                                                                        <input class="form-control" id="price" name="point" type="text" value="<?= $house['point'] ?>" required>
-                                                                                        <small class="form-text text-muted" id="helpPoint"></small>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button class="btn btn-secondary btn-md" type="button" data-dismiss="modal">Close</button>
-                                                                                <button class="btn btn-primary btn-md" type="submit">Save changes</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="font-weight-bold">Add House</h5>
-                                        <form class="theme-form" method="post">
-                                            <input class="form-control" id="add_house" name="add_house" type="hidden" value="true">
-                                            <div class="form-group">
-                                                <label class="col-form-label pt-0" for="name">Name</label>
-                                                <input class="form-control" id="name" name="name" type="text" required>
-                                                <small class="form-text text-muted" id="nameHelp"></small>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label pt-0" for="description">Description</label>
-                                                <textarea class="form-control" name="description" rows="5" id="description" required></textarea>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label pt-0" for="type">Type</label>
-                                                <select name="type" id="type" class="form-control" required>
-                                                    <?php foreach (getHouseType() as $key => $type){ ?>
-                                                        <option value="<?= $key ?>"><?= $type ?></option>
+                                <a href="project-house-create.php?id=<?= $project_id ?>" class="btn btn-info btn-sm float-right">Insert New House</a>
+                                <div class="table-responsive product-table">
+                                    <table class="display table-sm" id="datatable">
+                                        <thead>
+                                        <tr class="text-center">
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Price</th>
+                                            <th>Booking Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php while($house = $houses->fetch_assoc()){ ;?>
+                                            <tr>
+                                                <td><?= $house['id']; ?></td>
+                                                <td><?= strLimit($house['name'], 20); ?></td>
+                                                <td><?= strLimit(getHouseType($house['type']), 20); ?></td>
+                                                <td><?= displayPrice($house['price']); ?></td>
+                                                <td class="text-center"><?= (is_null($house['current_booking_id'])) ? " - " : "Booked" ?></td>
+                                                <td>
+                                                    <a href="project-house-edit.php?house_id=<?= $house['id']; ?>" class="btn btn-primary btn-xs">Edit</a>
+                                                    <?php if($house['current_booking_id'] == NULL){ ?>
+                                                        <a href="project-manage.php?id=<?=$project_id?>&delete_house=<?=$house['id']?>" onclick="return confirm('Are you sure want to delete this house?')" class="btn btn-danger btn-xs" >Delete</a>
                                                     <?php } ?>
-                                                </select>
-                                                <small class="form-text text-muted" id="nameHelp"></small>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label pt-0" for="price">Price</label>
-                                                <input class="form-control" id="price" name="price" type="text" value="0.00" required>
-                                                <small class="form-text text-muted" id="helpPrice"></small>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label pt-0" for="point">Point</label>
-                                                <input class="form-control" id="price" name="point" type="text" value="0" required>
-                                                <small class="form-text text-muted" id="helpPoint"></small>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <button class="btn btn-primary" type="submit">Add</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
-        <!-- footer end-->
+        <?php include('layout/footer.php'); ?>
     </div>
-    <!-- Page Body End-->
 </div>
-<!-- latest jquery-->
 
 </body>
 
-<?= include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
+<?php include('layout/script.php'); ?>
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<script>
+    const inputElement = document.querySelector('#image');
+    const pond = FilePond.create(inputElement);
+</script>
 </html>
