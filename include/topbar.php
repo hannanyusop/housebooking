@@ -16,7 +16,7 @@
         </div>
         <div class="collapse navbar-collapse yamm" id="navigation">
             <div class="button navbar-right">
-                <button class="btn btn-info wow bounceInRight login" onclick=" window.location='auth/login.php'">Login</button>
+                <button class="btn btn-primary wow bounceInRight login" onclick=" window.location='auth/login.php'">Login</button>
                 <button class="btn btn-outline-info wow fadeInRight" onclick=" window.location='auth/register.php'" data-wow-delay="0.5s">Register</button>
             </div>
         </div><!-- /.navbar-collapse -->

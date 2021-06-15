@@ -14,6 +14,10 @@ if(isset($_GET['id'])){
         echo "<script>alert('Invalid house!');window.location='index.php'</script>";
     }
 
+    #get random agent by using mysql function 'RAND()'
+    $agent_q = $db->query("SELECT * FROM agents ORDER BY RAND() LIMIT 1");
+    $agent = $agent_q->fetch_assoc();
+
 }else{
     header('Location:index.php');
 }
@@ -61,59 +65,6 @@ if(isset($_GET['id'])){
                             <h4 class="s-property-title">Description</h4>
                             <div class="s-property-content">
                                 <?= $house['description']?>
-                            </div>
-                        </div>
-
-                        <div class="section additional-details">
-                            <h4 class="s-property-title">Additional Details</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="similar-post-section padding-top-40">
-                    <div id="prop-smlr-slide_0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="garo/assets/img/similar/property-1.jpg"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> <?= $house['name']?></a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> <?= $house['sqft']?> Sqft </span>
-                                <span class="proerty-price pull-right"> <?= displayPrice($house['price'])?></span>
-                            </div>
-                        </div>
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="garo/assets/img/similar/property-2.jpg"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                            </div>
-                        </div>
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="garo/assets/img/similar/property-3.jpg"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
-                            </div>
-                        </div>
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="garo/assets/img/similar/property-1.jpg"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b> Area :</b> 120m </span>
-                                <span class="proerty-price pull-right"> $ 300,000</span>
                             </div>
                         </div>
                     </div>
@@ -191,47 +142,28 @@ if(isset($_GET['id'])){
                                 <div class="clear">
                                     <div class="col-xs-4 col-sm-4 dealer-face">
                                         <a href="">
-                                            <img src="garo/assets/img/client-face1.png" class="img-circle">
+                                            <img src="<?= $agent['image'] ?>" class="img-circle">
                                         </a>
                                     </div>
                                     <div class="col-xs-8 col-sm-8 ">
                                         <h3 class="dealer-name">
-                                            <a href="">Nathan James</a>
+                                            <a href=""><?= $agent['name'] ?></a><br>
                                             <span>Real Estate Agent</span>
                                         </h3>
-                                        <div class="dealer-social-media">
-                                            <a class="twitter" target="_blank" href="">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                            <a class="facebook" target="_blank" href="">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                            <a class="gplus" target="_blank" href="">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
-                                            <a class="linkedin" target="_blank" href="">
-                                                <i class="fa fa-linkedin"></i>
-                                            </a>
-                                            <a class="instagram" target="_blank" href="">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                        </div>
-
                                     </div>
                                 </div>
 
                                 <div class="clear">
                                     <ul class="dealer-contacts">
-                                        <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                        <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                        <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                        <li><i class="pe-7s-map-marker strong"> </i><?= $agent['address'] ?></li>
+                                        <li><i class="pe-7s-mail strong"> </i> <?= $agent['email'] ?></li>
+                                        <li><i class="pe-7s-call strong"> </i> <?= $agent['point'] ?></li>
                                     </ul>
-                                    <p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non…</p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                    <a href="book.php?id=<?=$house_id?>&agent=<?=$agent['id']?>" class="btn btn-primary btn-block">Book Now</a>
                 </aside>
             </div>
 

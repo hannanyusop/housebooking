@@ -1,8 +1,7 @@
 <?php
 
 session_start();
-session_destroy();
-
+unset($_SESSION['auth']);
 echo "<script>alert('Successfully logout!');window.location='login.php'</script>";
 
 ?>

@@ -31,7 +31,7 @@ $GLOBALS['admin_email'] = 'ecenterprinting@yahoo.com';
 
 #go to this link https://temp-mail.org/en/ and get temp email for testing
 
-$GLOBALS['email_test'] = 'nomobi2782@itwbuy.com';
+$GLOBALS['email_test'] = 'muzer@zetmail.com';
 $GLOBALS['env'] = 'development'; # 'production' / 'development'
 $GLOBALS['email_debug'] = true; # true / false
 

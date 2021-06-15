@@ -32,6 +32,10 @@
                               <div class="col-sm-12">
                                   <div class="text-left mt-2 m-l-20">Register Account Here?&nbsp;&nbsp;<a class="btn-link text-capitalize" href="register.php">Register</a></div>
                               </div>
+
+                              <div class="col-sm-12">
+                                  <div class="text-left mt-2 m-l-20">&nbsp<a class="btn-link text-capitalize" href="../index.php">Home Page</a></div>
+                              </div>
                           </div>
                       </form>
                     </div>

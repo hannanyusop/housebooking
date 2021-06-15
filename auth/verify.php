@@ -28,6 +28,11 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 'name' => $customer['name'],
                 'role' => 'customer'
             ];
+
+            if(isset($_SESSION['book'])){
+                header('Location:customer/booking.php');
+                die();
+            }
             
             header('Location:customer/index.php');
 
