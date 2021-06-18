@@ -9,9 +9,23 @@ $project_count = $result->num_rows;
 
 if(isset($_SESSION['book'])){
 
+    #check if user still have pending booking
+    $pending_q = $db->query("SELECT * FROM bookings WHERE status=1 AND customer_id=$user_id");
+
+    if($pending_q->num_rows > 0){
+
+        #delete booking session
+        unset($_SESSION['book']);
+        echo "<script>alert('You not allowed to make new booking. Please complete/cancel previous booking first!');window.location='booking-index.php'</script>";
+    }
+
     $session = $_SESSION['book'];
-    $house_q = $db->query("SELECT * FROM houses WHERE id=$session[house_id]");
+    $house_q = $db->query("SELECT * FROM houses WHERE id=$session[house_id] AND current_booking_id IS NULL");
     $house = $house_q->fetch_assoc();
+
+    if(!$house){
+        echo "<script>alert('Invalid house!');window.location='booking-index.php'</script>";
+    }
 
     $customer_q = $db->query("SELECT * FROM customers WHERE id=$user_id");
     $customer = $customer_q->fetch_assoc();
@@ -24,12 +38,18 @@ if(isset($_SESSION['book'])){
 
     if(isset($_POST['submit'])){
 
+        #delete session booking;
+        unset($_SESSION['book']);
+
         $code = rand(11111,99999);
 
         $booking = "INSERT INTO bookings (house_id,agent_id,customer_id,status,code,point_gain, remark, created_at, created_by_customer) VALUES ('$house[id]', $agent[id], '$user_id', 1, '$code', 0, '', NOW(), 1)";
         if (!$db->query($booking)) {
             echo "Error: " . $booking . "<br>" . $db->error; exit();
         }else{
+
+            #set current booking id to this house to prevent from duplicate booking
+            $db->query("UPDATE houses SET current_booking_id=$db->insert_id WHERE id=$house[id]");
 
             $body = "Hye $agent[name],<br><br>
             <p>New Booking Request From</p>
@@ -45,7 +65,6 @@ if(isset($_SESSION['book'])){
             <small>Please login to get full booking detail</small>";
 
             sendEmail($agent['email'], "BOOKING REQUEST", $body);
-            $last_id = $db->insert_id;
             echo "<script>alert('New project successfully created!');window.location='booking-index.php'</script>";
         }
     }

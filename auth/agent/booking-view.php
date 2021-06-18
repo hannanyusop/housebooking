@@ -14,6 +14,10 @@ if(isset($_GET['id'])){
     }
 
     if(isset($_GET['cancel'])){
+
+        #set current booking to null
+        $db->query("UPDATE houses SET current_booking_id=null WHERE id=$booking[house_id]");
+
         $db->query("DELETE FROM bookings WHERE id='$booking_id'");
         echo "<script>alert('Booking deleted!');window.location='booking-index.php'</script>";
         exit();

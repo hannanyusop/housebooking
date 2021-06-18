@@ -43,6 +43,10 @@ if(isset($_GET['house_id'])){
 
             sendEmail($customer['email'], "BOOKING CODE", $body);
             $last_id = $db->insert_id;
+
+            #set current booking id to this house to prevent from duplicate booking
+            $db->query("UPDATE houses SET current_booking_id=$last_id WHERE id=$house[id]");
+
             echo "<script>alert('New project successfully created!');window.location='booking-view.php?id=".$last_id."'</script>";
         }
     }

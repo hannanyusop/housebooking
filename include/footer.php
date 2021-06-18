@@ -4,14 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="pull-left">
-                    <span> (C) <a href="http://www.KimaroTec.com">KimaroTheme</a> , All rights reserved 2016  </span>
+                    <span><a href="#"><?= $GLOBALS['APP_NAME'] ?></a> , All rights reserved 2021  </span>
                 </div>
                 <div class="bottom-menu pull-right">
                     <ul>
-                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Property</a></li>
-                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">Faq</a></li>
-                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                        <li><a class="wow fadeInUp animated" href="index.php" data-wow-delay="0.2s">Home</a></li>
+                        <li><a class="wow fadeInUp animated" href="auth/login.php" data-wow-delay="0.3s">Login</a></li>
+                        <li><a class="wow fadeInUp animated" href="auth/register.php" data-wow-delay="0.4s">Register</a></li>
                     </ul>
                 </div>
             </div>

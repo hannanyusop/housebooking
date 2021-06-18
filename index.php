@@ -3,7 +3,24 @@
 <body>
 <?php include('include/topbar.php')?>
 <?php
-$houses_q = $db->query('SELECT * FROM houses');
+
+$name = ''; $type = [];
+$in_type = '';
+if(isset($_GET['name'])){
+
+    $name = $_GET['name'];
+
+    if(isset($_GET['type']) && $_GET['type'] != ""){
+        $type = $_GET['type'];
+        $in_type = "AND type=$type";
+
+//        $in_type = "AND type IN(".implode(",",$type).")";
+
+    }
+    $houses_q = $db->query("SELECT * FROM houses WHERE name LIKE '%$name%' $in_type AND current_booking_id IS NULL ");
+}else{
+    $houses_q = $db->query("SELECT * FROM houses WHERE current_booking_id IS NULL");
+}
 ?>
 
 
@@ -17,178 +34,22 @@ $houses_q = $db->query('SELECT * FROM houses');
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                 <h2>property Searching Just Got So Easy</h2>
-                <p class="text-white font-weight-bold">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                 <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                    <form action="" class=" form-inline">
-                        <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
-
+                    <form class=" form-inline">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Key word">
+                            <input type="text" name="name" class="form-control" placeholder="Key word" value="<?= $_GET['name'] ?? '' ?>">
                         </div>
                         <div class="form-group">
-                            <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
-
-                                <option>New york, CA</option>
-                                <option>Paris</option>
-                                <option>Casablanca</option>
-                                <option>Tokyo</option>
-                                <option>Marraekch</option>
-                                <option>kyoto , shibua</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select id="basic" class="selectpicker show-tick form-control">
-                                <option> -Status- </option>
-                                <option>Rent </option>
-                                <option>Boy</option>
-                                <option>used</option>
-
+                            <select id="lunchBegins" name="type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select House Type">
+                                <option value="">All</option>
+                                <?php foreach (getHouseType() as $key => $name_type){ ?>
+                                    <option value="<?= $key?>" <?= (isset($_GET['type']) == $key)? "selected" : "" ?>><?= $name_type ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
-
-                        <div style="display: none;" class="search-toggle">
-
-                            <div class="search-row">
-
-                                <div class="form-group mar-r-20">
-                                    <label for="price-range">Price range ($):</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[0,450]" id="price-range" ><br />
-                                    <b class="pull-left color">2000$</b>
-                                    <b class="pull-right color">100000$</b>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group mar-l-20">
-                                    <label for="property-geo">Property geo (m2) :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[50,450]" id="property-geo" ><br />
-                                    <b class="pull-left color">40m</b>
-                                    <b class="pull-right color">12000m</b>
-                                </div>
-                                <!-- End of  -->
-                            </div>
-
-                            <div class="search-row">
-
-                                <div class="form-group mar-r-20">
-                                    <label for="price-range">Min baths :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[250,450]" id="min-baths" ><br />
-                                    <b class="pull-left color">1</b>
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group mar-l-20">
-                                    <label for="property-geo">Min bed :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[250,450]" id="min-bed" ><br />
-                                    <b class="pull-left color">1</b>
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  -->
-
-                            </div>
-                            <br>
-                            <div class="search-row">
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Fire Place(3100)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Dual Sinks(500)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Hurricane Shutters(99)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-                            </div>
-
-                            <div class="search-row">
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Swimming Pool(1190)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 2 Stories(4600)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Emergency Exit(200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-                            </div>
-
-                            <div class="search-row">
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Laundry Room(10073)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Jog Path(1503)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 26' Ceilings(1200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-                            </div>
-
-                        </div>
-
+                        <a class="text" href="index.php">Reset</a>
                     </form>
                 </div>
             </div>
@@ -204,35 +65,6 @@ $houses_q = $db->query('SELECT * FROM houses');
             <div class="col-md-12  padding-top-40 properties-page">
                 <div class="col-md-12 ">
                     <div class="col-xs-10 page-subheader sorting pl0">
-
-                        <ul class="sort-by-list">
-                            <li class="active">
-                                <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
-                                    Property Date <i class="fa fa-sort-amount-asc"></i>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
-                                    Property Price <i class="fa fa-sort-numeric-desc"></i>
-                                </a>
-                            </li>
-                        </ul><!--/ .sort-by-list-->
-
-                        <div class="items-per-page">
-                            <label for="items_per_page"><b>Property per page :</b></label>
-                            <div class="sel">
-                                <select id="items_per_page" name="per_page">
-                                    <option value="3">3</option>
-                                    <option value="6">6</option>
-                                    <option value="9">9</option>
-                                    <option selected="selected" value="12">12</option>
-                                    <option value="15">15</option>
-                                    <option value="30">30</option>
-                                    <option value="45">45</option>
-                                    <option value="60">60</option>
-                                </select>
-                            </div><!--/ .sel-->
-                        </div><!--/ .items-per-page-->
                     </div>
 
                     <div class="col-xs-2 layout-switcher">
@@ -278,20 +110,6 @@ $houses_q = $db->query('SELECT * FROM houses');
                             </div>
                         </div>
                         <?php } ?>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="pull-right">
-                        <div class="pagination">
-                            <ul>
-                                <li><a href="#">Prev</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">Next</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>

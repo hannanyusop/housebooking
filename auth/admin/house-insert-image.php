@@ -148,7 +148,7 @@
 
                                     <div class="d-flex">
                                         <div class="p-2">
-                                            <a href="project-index.php" type="reset" class="btn btn-dark">Back</a>
+                                            <a href="project-manage.php?id=<?= $house['project_id'] ?>" type="reset" class="btn btn-dark">Back</a>
                                         </div>
                                         <div class="ml-auto p-2">
                                             <button type="submit" class="btn btn-primary" name="insert">Add Brochure</button>

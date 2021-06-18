@@ -16,56 +16,6 @@
 
         $houses = $db->query("SELECT * FROM houses where project_id = $project_id");
 
-        $brochures = $db->query("SELECT * FROM project_brochures where project_id = $project_id");
-
-
-        if(isset($_POST['title'])){
-
-            $target_dir = "../../assets/uploads/";
-            $temp = explode(".", $_FILES["file"]["name"]);
-            $rename = round(microtime(true)) . '.' . end($temp);
-            $file_location = $target_dir.$rename;
-
-            #check if file more than 10MB
-            if($_FILES['file']['size'] > 10000000){
-                echo "<script>alert('Ops! Exceed file limit.(10MB)');window.location='project-manage.php?id=$project_id';</script>";
-
-                exit();
-            }
-
-
-            try{
-                move_uploaded_file($_FILES["file"]["tmp_name"], $file_location);
-            }catch (Exception $e){
-                var_dump($e);exit();
-            }
-
-            $insert_b = "INSERT INTO project_brochures (project_id,title,file_location) VALUES ($project_id, '$_POST[title]', '$file_location')";
-
-            if (!$db->query($insert_b)) {
-                echo "Error: " . $insert_b . "<br>" . $db->error; exit();
-            }else{
-                echo "<script>alert('New brochure successfully added!');window.location='project-manage.php?id=$project_id'</script>";
-            }
-        }
-
-        if(isset($_GET['delete'])){
-
-            $brochure_q = $db->query("SELECT * FROM project_brochures WHERE id='$_GET[delete]'");
-            $brochure = $brochure_q->fetch_assoc();
-
-            if(!$brochure){
-                echo "<script>alert('Brochure not exist!');window.location='project-manage.php?id=$project_id'</script>";
-            }
-
-            if (!$db->query("DELETE FROM project_brochures WHERE id=$_GET[delete]")) {
-                echo "Error: ". $db->error; exit();
-            }else{
-                unlink($brochure['file_location']);
-                echo "<script>alert('Brochure successfully deleted!');window.location='project-manage.php?id=$project_id'</script>";
-            }
-        }
-
         if(isset($_GET['delete_house'])){
 
             $brochure_q = $db->query("SELECT * FROM houses WHERE id='$_GET[delete_house]'");
@@ -107,16 +57,9 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item active"><a href="index.php">Project Management</a></li>
+                                    <li class="breadcrumb-item active"><a href="project-index.php">Project Management</a></li>
                                     <li class="breadcrumb-item">Manage</li>
                                 </ol>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="bookmark pull-right">
-                                <ul>
-                                    <li><a href="user-admin-create.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Create</a> </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -124,46 +67,6 @@
             </div>
 
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="theme-form" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label class="col-form-label pt-0" for="title">Title</label>
-                                        <input class="form-control" id="title" name="title" required>
-                                        <small class="form-text text-muted" id="titleHelp"></small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="file">File</label>
-                                        <input class="form-control" type="file" name="file" id="file" accept="image/*">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-info">Add Brochure</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="my-gallery card-body row" itemscope="" data-pswp-uid="1">
-
-                                    <?php while($brochure = $brochures->fetch_assoc()){ ;?>
-                                        <figure class="col-xl-3 col-md-4 col-6" itemprop="associatedMedia" itemscope="">
-                                            <a href="<?= $brochure['file_location'] ?>" itemprop="contentUrl" data-size="1600x950" data-original-title="" title="">
-                                                <img class="img-thumbnail" src="<?= $brochure['file_location'] ?>" itemprop="thumbnail" alt="Image description" data-original-title="" title="">
-                                            </a>
-                                            <p><?= $brochure['title'] ?></p>
-                                            <a href="project-manage.php?id=<?=$project_id?>&delete=<?=$brochure['id']?>" onclick="return confirm('Are you sure want to remove this brochure?')" class="btn btn-danger btn-sm btn-round"><i class="fa fa-trash"></i> </a>
-                                        </figure>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -191,6 +94,7 @@
                                                 <td class="text-center"><?= (is_null($house['current_booking_id'])) ? " - " : "Booked" ?></td>
                                                 <td>
                                                     <a href="project-house-edit.php?house_id=<?= $house['id']; ?>" class="btn btn-primary btn-xs">Edit</a>
+                                                    <a href="house-insert-image.php?id=<?= $house['id']; ?>" class="btn btn-success btn-xs">Manage Brochure</a>
                                                     <?php if($house['current_booking_id'] == NULL){ ?>
                                                         <a href="project-manage.php?id=<?=$project_id?>&delete_house=<?=$house['id']?>" onclick="return confirm('Are you sure want to delete this house?')" class="btn btn-danger btn-xs" >Delete</a>
                                                     <?php } ?>

@@ -24,10 +24,9 @@ $project_count = $result->num_rows;
                     <div class="row">
                         <?php while($project = $result->fetch_assoc()){ ;?>
                         <?php
-                        $q_project_brochures = $db->query("SELECT * FROM project_brochures WHERE project_id=$project[id]");
-                        $project_brochures = $q_project_brochures->fetch_assoc();
 
-                        $brochures = $db->query("SELECT * FROM project_brochures where project_id = $project[id]");
+                        #get brochure list
+                        $brochures = $db->query("SELECT * FROM house_images WHERE house_id IN(SELECT id FROM houses WHERE project_id = $project[id])");
 
                         $q_available_house = $db->query("SELECT * FROM houses WHERE current_booking_id = null AND  project_id=$project[id]");
 
@@ -88,7 +87,7 @@ $project_count = $result->num_rows;
 
                                     <div class="gallery gallery-md">
                                         <?php while($brochure = $brochures->fetch_assoc()){ ;?>
-                                            <div class="gallery-item" data-image="<?= $brochure['file_location'] ?>" data-title="<?= $brochure['file_location'] ?>" href="<?= $brochure['file_location'] ?>" title="Image 1" style="background-image: url(&quot;<?= $brochure['file_location'] ?>&quot;);"></div>
+                                            <div class="gallery-item" data-image="<?= $brochure['url'] ?>" data-title="<?= $brochure['url'] ?>" href="<?= $brochure['url'] ?>" title="Image 1" style="background-image: url(&quot;<?= $brochure['file_location'] ?>&quot;);"></div>
                                         <?php } ?>
                                     </div>
                                     <div class="card-footer text-center">
