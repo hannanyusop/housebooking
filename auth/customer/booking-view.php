@@ -227,7 +227,12 @@ if(isset($_GET['id'])){
                                         <input type="file" name="receipt" id="receipt" class="form-control">
                                     </div>
                                 </div>
-
+                                <?php if($booking['status'] == 1){ ?>
+                                    <span class="text text-success font-weight-bold">
+                                        Note : Please contact your agent to get bank info &
+                                        house information before making any deposit payment.
+                                    </span>
+                                <?php } ?>
                         </div>
                     </div>
                     <div class="card-footer">

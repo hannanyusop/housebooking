@@ -24,5 +24,3 @@
         $('#datatable').DataTable();
     } );
 </script>
-<!-- Plugin used-->
-<script>window.windowvar = window.windowvar || {};windowvar.hello = 'Hello';</script>

@@ -121,10 +121,10 @@
                                         <small class="form-text text-muted" id="helpPoint"></small>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="file">Images</label>
-                                        <input type="file" id="image" name="image" multiple>
-                                    </div>
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="file">Images</label>-->
+<!--                                        <input type="file" name="image[]" multiple>-->
+<!--                                    </div>-->
 
                                     <div class="form-group">
                                         <button class="btn btn-primary" type="submit">Add</button>
@@ -145,7 +145,7 @@
 <?php include('layout/script.php'); ?>
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 <script>
-    const inputElement = document.querySelector('#image');
+    const inputElement = document.querySelector('input[type=file]');
     const pond = FilePond.create(inputElement);
 </script>
 </html>

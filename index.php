@@ -245,10 +245,20 @@ $houses_q = $db->query('SELECT * FROM houses');
                     <div id="list-type" class="proerty-th">
 
                         <?php while($house = $houses_q->fetch_assoc()){ ;?>
+                            <?php
+                                $brochure_q = $db->query("SELECT * FROM house_images WHERE house_id=$house[id] LIMIT 1");
+                                $brochure = $brochure_q->fetch_assoc();
+
+                                $image = 'garo/assets/img/demo/property-3.jpg';
+                                if($brochure){
+                                    $image = $brochure['url'];
+                                }
+
+                            ?>
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="view.php?id=<?= $house['id'] ?>" ><img src="garo/assets/img/demo/property-3.jpg" alt=""></a>
+                                    <a href="view.php?id=<?= $house['id'] ?>" ><img src="<?= $image ?>" alt=""></a>
                                 </div>
 
                                 <div class="item-entry overflow">

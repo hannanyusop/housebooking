@@ -12,7 +12,10 @@ if(isset($_GET['id'])){
         if (!$db->query($insert_house)) {
             echo "Error: " . $insert_house . "<br>" . $db->error; exit();
         }else{
-            echo "<script>alert('New house successfully created!');window.location='project-manage.php?id=$project_id'</script>";
+
+            $house_id = $db->insert_id;
+
+            echo "<script>alert('New house successfully created!');window.location='house-insert-image.php?id=$house_id'</script>";
         }
     }
 }

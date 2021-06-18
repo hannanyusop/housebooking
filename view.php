@@ -18,6 +18,19 @@ if(isset($_GET['id'])){
     $agent_q = $db->query("SELECT * FROM agents ORDER BY RAND() LIMIT 1");
     $agent = $agent_q->fetch_assoc();
 
+
+    #get brochure list
+    $brochure_q = $db->query("SELECT * FROM house_images WHERE house_id=$house[id]");
+
+
+    if($brochure_q->num_rows > 0){
+        while ($brochure = $brochure_q->fetch_assoc()){
+            $images[] = $brochure['url'];
+        }
+    }else{
+        $images[] = 'garo/assets/img/demo/property-3.jpg';
+    }
+
 }else{
     header('Location:index.php');
 }
@@ -43,18 +56,11 @@ if(isset($_GET['id'])){
                                 </div>
 
                                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                    <li data-thumb="garo/assets/img/property-1/property1.jpg">
-                                        <img src="garo/assets/img/property-1/property1.jpg" />
+                                    <?php foreach ($images as $image){?>
+                                    <li data-thumb="<?= $image ?>">
+                                        <img src="<?= $image ?>"  alt="<?= $image ?>">
                                     </li>
-                                    <li data-thumb="garo/assets/img/property-1/property2.jpg">
-                                        <img src="garo/assets/img/property-1/property3.jpg" />
-                                    </li>
-                                    <li data-thumb="garo/assets/img/property-1/property3.jpg">
-                                        <img src="garo/assets/img/property-1/property3.jpg" />
-                                    </li>
-                                    <li data-thumb="garo/assets/img/property-1/property4.jpg">
-                                        <img src="garo/assets/img/property-1/property4.jpg" />
-                                    </li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>

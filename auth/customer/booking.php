@@ -26,7 +26,7 @@ if(isset($_SESSION['book'])){
 
         $code = rand(11111,99999);
 
-        $booking = "INSERT INTO bookings (house_id,agent_id,customer_id,status,code,point_gain, remark, created_at) VALUES ('$house[id]', $agent[id], '$user_id', 1, '$code', 0, '', NOW())";
+        $booking = "INSERT INTO bookings (house_id,agent_id,customer_id,status,code,point_gain, remark, created_at, created_by_customer) VALUES ('$house[id]', $agent[id], '$user_id', 1, '$code', 0, '', NOW(), 1)";
         if (!$db->query($booking)) {
             echo "Error: " . $booking . "<br>" . $db->error; exit();
         }else{

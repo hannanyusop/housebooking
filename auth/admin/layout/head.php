@@ -33,4 +33,19 @@
     <link rel="stylesheet" type="text/css" id="color" href="../../assets/css/light-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/responsive.css">
+
+
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">-->
+    <link href="../../assets/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="../../assets/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="../../assets/js/plugins/piexif.js" type="text/javascript"></script>
+    <script src="../../assets/js/plugins/sortable.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
+    <script src="../../assets/js/fileinput.js" type="text/javascript"></script>
+    <script src="../../assets/js/locales/fr.js" type="text/javascript"></script>
+    <script src="../../assets/js/locales/es.js" type="text/javascript"></script>
+    <script src="../../assets/themes/fas/theme.js" type="text/javascript"></script>
+    <script src="../../assets/themes/explorer-fas/theme.js" type="text/javascript"></script>
 </head>
