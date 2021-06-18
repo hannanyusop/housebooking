@@ -22,7 +22,6 @@
                     <button class="btn btn-outline-info wow fadeInRight" onclick=" window.location='auth/logout.php'" data-wow-delay="0.5s">Logout</button>
                 <?php }else{ ?>
                     <button class="btn btn-primary wow bounceInRight login" onclick=" window.location='auth/login.php'">Login</button>
-                    <button class="btn btn-outline-info wow fadeInRight" onclick=" window.location='auth/register.php'" data-wow-delay="0.5s">Register</button>
                 <?php } ?>
 
             </div>
