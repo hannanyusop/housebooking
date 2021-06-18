@@ -101,7 +101,7 @@ if(isset($_GET['id'])){
             <!-- Container-fluid Ends-->
         </div>
         <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
+        <?php include('layout/footer.php'); ?>
         <!-- footer end-->
     </div>
     <!-- Page Body End-->
@@ -110,6 +110,5 @@ if(isset($_GET['id'])){
 
 </body>
 
-<?= include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
+<?php include('layout/script.php'); ?>
 </html>

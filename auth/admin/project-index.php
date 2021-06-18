@@ -75,7 +75,6 @@
                                                 <td><?= $available ." / ".$total ?></td>
                                                 <td><?= getProjectStatus($data['status']) ?></td>
                                                 <td>
-                                                    <a href="project-summary.php?id=<?= $data['id']; ?>" class="btn btn-outline-dark btn-xs">Summary</a>
                                                     <a href="project-manage.php?id=<?= $data['id']; ?>" class="btn btn-success btn-xs">Manage</a>
                                                     <a href="project-edit.php?id=<?= $data['id'] ?>" class="btn btn-info btn-xs">Edit</a>
                                                 </td>

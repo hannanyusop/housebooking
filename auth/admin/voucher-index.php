@@ -57,7 +57,7 @@
                         <div class="col">
                             <div class="bookmark pull-right">
                                 <ul>
-                                    <li><a href="voucher-create.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Create</a> </li>
+                                    <li><a href="voucher-create.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Insert New Voucher</a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -79,7 +79,6 @@
                                             <th>Image</th>
                                             <th>Quantity</th>
                                             <th>Valid Until</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -114,15 +113,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
-        <!-- footer end-->
+        <?php include('layout/footer.php'); ?>
     </div>
-    <!-- Page Body End-->
 </div>
-<!-- latest jquery-->
 
 </body>
 

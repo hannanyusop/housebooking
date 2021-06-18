@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="pull-left">
-                    <span><a href="#"><?= $GLOBALS['APP_NAME'] ?></a> , All rights reserved 2021  </span>
+                    <span><a href="#"><?= $GLOBALS['APP_NAME'] ?></a> 2021  </span>
                 </div>
                 <div class="bottom-menu pull-right">
                     <ul>

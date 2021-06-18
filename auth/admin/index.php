@@ -141,11 +141,11 @@ $top_agent_q = $db->query("SELECT * FROM agents order by rank DESC LIMIT 5");
                             <div class="card">
                                 <div class="card-body">
                                     <div class="media">
-                                        <h5 class="mb-0">Total House </h5>
+                                        <h5 class="mb-0">Total Property </h5>
                                     </div>
                                     <div class="project-widgets text-center">
                                         <h1 class="font-primary counter"><?= $house ?></h1>
-                                        <h6 class="mb-0">Houses</h6>
+                                        <h6 class="mb-0">Properties</h6>
                                     </div>
                                 </div>
                                 <div class="card-footer project-footer">

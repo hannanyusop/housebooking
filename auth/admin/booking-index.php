@@ -49,9 +49,10 @@ $result = $db->query("SELECT * FROM bookings");
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Project</th>
+                                            <th scope="col">Property Name</th>
                                             <th>Type</th>
                                             <th scope="col">Agent Name</th>
+                                            <th scope="col">Customer Name</th>
                                             <th scope="col">Status</th>
                                             <th></th>
                                         </tr>
@@ -64,6 +65,9 @@ $result = $db->query("SELECT * FROM bookings");
                                             $house_q = $db->query("SELECT * FROM houses WHERE id=$house_id");
                                             $house = $house_q->fetch_assoc();
 
+                                            $customer_q = $db->query("SELECT * FROM customers WHERE id=$booking[customer_id]");
+                                            $customer = $customer_q->fetch_assoc();
+
                                             $project_q = $db->query("SELECT * FROM projects WHERE id='$house[project_id]'");
                                             $project = $project_q->fetch_assoc();
 
@@ -72,9 +76,13 @@ $result = $db->query("SELECT * FROM bookings");
                                             ?>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td><?= $project['name'] ?></td>
+                                                <td>
+                                                    <?= $house['name'] ?><br>
+                                                    <small>Project: <?= $project['name'] ?></small>
+                                                </td>
                                                 <td><?= getHouseType($house['type']) ?></td>
                                                 <td><?= $agent['name'] ?></td>
+                                                <td><?= $customer['name'] ?></td>
                                                 <td><?= getBadgeBookingStatus($booking['status']) ?></td>
                                                 <td>
                                                     <div class="btn-group" role="group">

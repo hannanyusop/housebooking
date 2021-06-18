@@ -41,7 +41,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item active"><a href="index.php">Project Management</a></li>
-                                    <li class="breadcrumb-item">House</li>
+                                    <li class="breadcrumb-item">Property</li>
                                     <li class="breadcrumb-item">Insert</li>
                                 </ol>
                             </div>
@@ -61,7 +61,7 @@
                     <div class="col-md-8 offset-md-2">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="font-weight-bold">Add House</h5>
+                                <h5 class="font-weight-bold">Add Property</h5>
                                 <form class="theme-form" method="post" action="project-insert-house.php?id=<?= $project_id?>" enctype="multipart/form-data">
                                     <input class="form-control" id="add_house" name="add_house" type="hidden" value="true">
                                     <div class="form-group">

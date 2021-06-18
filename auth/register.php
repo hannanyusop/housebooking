@@ -43,10 +43,10 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-sm-4">
-                                            <button class="btn btn-primary" type="submit">Sign Up</button>
+                                            <button class="btn btn-warning" type="submit">Sign Up</button>
                                         </div>
                                         <div class="col-sm-8">
-                                            <div class="text-left mt-2 m-l-20">Are you already user?  <a class="btn-link text-capitalize" href="login.php">Login</a></div>
+                                            <div class="text-left mt-2 m-l-20">Are you already user?  <a class="btn-link font-weight-bold text-warning" href="login.php">Login</a></div>
                                         </div>
                                     </div>
                                 </form>

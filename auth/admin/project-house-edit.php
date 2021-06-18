@@ -79,7 +79,7 @@
                     <div class="col-md-8 offset-md-2">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="font-weight-bold">Add House</h5>
+                                <h5 class="font-weight-bold">Edit Property</h5>
                                 <form class="theme-form" method="post" enctype="multipart/form-data">
                                     <input class="form-control" id="add_house" name="add_house" type="hidden" value="true">
                                     <div class="form-group">
@@ -137,11 +137,6 @@
                                         <label class="col-form-label pt-0" for="point">Point</label>
                                         <input class="form-control" id="price" name="point" type="number" value="<?= $house['point'] ?>" step="1" min="0" required>
                                         <small class="form-text text-muted" id="helpPoint"></small>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="file">Images</label>
-                                        <input type="file" id="image" name="image" multiple>
                                     </div>
 
                                     <div class="form-group">

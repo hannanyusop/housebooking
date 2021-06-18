@@ -71,7 +71,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <a href="project-house-create.php?id=<?= $project_id ?>" class="btn btn-info btn-sm float-right">Insert New House</a>
+                                <a href="project-house-create.php?id=<?= $project_id ?>" class="btn btn-info btn-sm float-right">Insert New Property</a>
                                 <div class="table-responsive product-table">
                                     <table class="display table-sm" id="datatable">
                                         <thead>

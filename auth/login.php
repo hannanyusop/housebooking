@@ -25,16 +25,19 @@
                           <input class="form-control" type="password" name="password" id="password">
                         </div>
                         <div class="form-group form-row mt-3 mb-0">
-                          <button class="btn btn-primary btn-block" type="submit">Login</button>
+                          <button class="btn btn-warning btn-block" type="submit">Login</button>
                         </div>
 
-                          <div class="form-row">
+                          <div class="form-row text-center text">
                               <div class="col-sm-12">
-                                  <div class="text-left mt-2 m-l-20">Register Account Here?&nbsp;&nbsp;<a class="btn-link text-capitalize" href="register.php">Register</a></div>
+                                  <div class="mt-2 m-l-20">Register Account Here?&nbsp;&nbsp;<a class="btn-link font-weight-bold text-warning" href="register.php">Register</a></div>
                               </div>
 
+                              <div class="col-md-12">
+                                  <b class="text-center mt-2 m-l-20">OR</b>
+                              </div>
                               <div class="col-sm-12">
-                                  <div class="text-left mt-2 m-l-20">&nbsp<a class="btn-link text-capitalize" href="../index.php">Home Page</a></div>
+                                  <div class="text-center">Back To <a class="btn-link font-weight-bold text-warning" href="../index.php">Home Page</a></div>
                               </div>
                           </div>
                       </form>
