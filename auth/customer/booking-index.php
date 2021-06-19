@@ -14,17 +14,23 @@ $project_count = $result->num_rows;
         <div class="navbar-bg"></div>
         <?php include('layout/top-bar.php') ?>
 
+        <nav class="navbar navbar-secondary navbar-expand-lg">
+            <div class="container">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="booking-index.php" class="nav-link"><span>Dashboard</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="fa fa-caret-right"></i><span>Booking List</span></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
         <!-- Main Content -->
         <div class="main-content">
             <section class="section">
-                <div class="section-header">
-                    <h1>Booking List</h1>
-                    <div class="section-header-breadcrumb">
-                        <div class="breadcrumb-item active"><a href="index.php">Dashboard</a></div>
-                        <div class="breadcrumb-item">Booking List</div>
-                    </div>
-                </div>
-
                 <div class="section-body">
                     <div class="row">
                         <div class="col-md-12">

@@ -161,9 +161,9 @@ if(isset($_GET['id'])){
 
                                 <div class="clear">
                                     <ul class="dealer-contacts">
-                                        <li><i class="pe-7s-map-marker strong"> </i><?= $agent['address'] ?></li>
+                                        <li><i class="pe-7s-call strong"> </i> <?= $agent['phone_number'] ?></li>
                                         <li><i class="pe-7s-mail strong"> </i> <?= $agent['email'] ?></li>
-                                        <li><i class="pe-7s-call strong"> </i> <?= $agent['point'] ?></li>
+                                        <li><i class="pe-7s-map-marker strong"> </i><?= $agent['address'] ?></li>
                                     </ul>
                                 </div>
                             </div>

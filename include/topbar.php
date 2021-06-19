@@ -20,6 +20,7 @@
                 <?php if(isset($_SESSION['auth'])){ ?>
                     <button class="btn btn-primary wow bounceInRight login" onclick=" window.location='auth/dashboard.php'">Dashboard</button>
                     <button class="btn btn-outline-info wow fadeInRight" onclick=" window.location='auth/logout.php'" data-wow-delay="0.5s">Logout</button>
+                    Hi, <?= $_SESSION['auth']['name']; ?>
                 <?php }else{ ?>
                     <button class="btn btn-primary wow bounceInRight login" onclick=" window.location='auth/login.php'">Login</button>
                 <?php } ?>

@@ -37,7 +37,7 @@ $agent_q = $db->query("SELECT * FROM agents");
 $agent = $agent_q->num_rows;
 
 $house_q = $db->query("SELECT * FROM houses");
-$house = $agent_q->num_rows;
+$house = $house_q->num_rows;
 
 $booking_q = $db->query("SELECT * FROM bookings");
 $booking = $booking_q->num_rows;
