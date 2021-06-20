@@ -34,8 +34,6 @@
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../../assets/css/responsive.css">
 
-
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">-->
     <link href="../../assets/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
     <link href="../../assets/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>

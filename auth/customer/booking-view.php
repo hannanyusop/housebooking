@@ -239,7 +239,7 @@ if(isset($_GET['id'])){
                                 <div class="form-group row" id="code_div">
                                     <label for="receipt" class="col-sm-3 col-form-label">Booking Fee Receipt</label>
                                     <div class="col-sm-9">
-                                        <input type="file" name="receipt" id="receipt" class="form-control">
+                                        <input type="file" name="receipt" id="receipt" class="form-control"  accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*" required>
                                     </div>
                                 </div>
                                 <?php if($booking['status'] == 1){ ?>

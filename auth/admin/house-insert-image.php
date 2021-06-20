@@ -142,7 +142,7 @@
                                     </div>
                                     <br>
                                     <div class="file-loading">
-                                        <input id="file-0a" class="file" type="file" name="file[]" data-theme="fas" multiple>
+                                        <input id="file-0a" class="file" type="file" name="file[]" data-theme="fas" accept="image/*" multiple required>
                                     </div>
                                     <br>
 
