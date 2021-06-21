@@ -52,6 +52,9 @@ if(isset($_GET['id'])){
             echo "<script>alert('Booking approved!');window.location='booking-view.php?id=$booking_id'</script>";
         }else{
 
+
+            $db->query("UPDATE houses SET current_booking_id=null WHERE id=$house_id");
+
             $update = $db->query("UPDATE bookings SET status=5 WHERE id=$booking_id");
             echo "<script>alert('Booking rejected!');window.location='booking-view.php?id=$booking_id'</script>";
         }
