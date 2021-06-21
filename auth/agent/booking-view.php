@@ -144,15 +144,6 @@ if(isset($_GET['id'])){
                                                 </div>
                                             </div>
 
-                                            <?php if(!is_null($booking['receipt'])){ ?>
-                                                <div class="form-group row" id="code_div">
-                                                    <label for="receipt" class="col-sm-3 col-form-label">Booking Fee Receipt</label>
-                                                    <div class="col-sm-9">
-                                                        <img src="<?= $booking['receipt'] ?>" width="400">
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-
                                             <div class="form-group row">
                                                 <label for="booking_status" class="col-sm-3 col-form-label">Reward Gain</label>
                                                 <div class="col-sm-9">
@@ -161,6 +152,14 @@ if(isset($_GET['id'])){
                                             </div>
                                         </div>
                                     </div>
+                                    <?php if(!is_null($booking['receipt'])){ ?>
+                                        <div class="form-group row" id="code_div">
+                                            <label for="receipt" class="col-sm-3 col-form-label">Booking Fee Receipt</label>
+                                            <div class="col-sm-9">
+                                                <img src="<?= $booking['receipt'] ?>" width="400">
+                                            </div>
+                                        </div>
+                                    <?php } ?>
                                     <div class="card-footer">
                                         <a href="booking-index.php" class="btn btn-info btn-lg">Back</a>
                                         <?php if($booking['status'] == 0){ ?>
