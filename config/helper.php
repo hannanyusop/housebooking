@@ -181,7 +181,7 @@ function sendEmail($recipient_email, $title = "", $body){
         if($GLOBALS['email_test']  )
 
             if($GLOBALS['email_debug']){
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+//                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
             }
 
             $mail->isSMTP();
