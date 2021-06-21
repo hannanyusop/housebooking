@@ -119,12 +119,6 @@ if(isset($_SESSION['book'])){
                                                 <p class="font-weight-bold"><?= displayPrice($house['price'])?></p>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-3 col-form-label">Point Reward</label>
-                                            <div class="col-sm-9">
-                                                <p class="font-weight-bold"><?= $house['point'] ?></p>
-                                            </div>
-                                        </div>
 
                                         <hr>
                                         <h5>Agent Info</h5>
