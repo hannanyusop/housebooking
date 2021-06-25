@@ -34,8 +34,8 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
 </head>
 
-<div class="loader-wrapper">
-    <div class="loader bg-white">
-        <div class="whirly-loader"> </div>
-    </div>
-</div>
+<!--<div class="loader-wrapper">-->
+<!--    <div class="loader bg-white">-->
+<!--        <div class="whirly-loader"> </div>-->
+<!--    </div>-->
+<!--</div>-->

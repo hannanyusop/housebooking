@@ -115,7 +115,7 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <a href="project-manage.php?id=<?=$house_id?>" class="btn btn-dark text-white"><i class="fa fa-caret-left mr-1"></i> Back</a>
+                    <a href="project-manage.php?id=<?=$house['project_id']?>" class="btn btn-dark text-white"><i class="fa fa-caret-left mr-1"></i> Back</a>
                 </div>
                 <div class="row">
                     <div class="col-md-8 offset-md-2">

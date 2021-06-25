@@ -49,7 +49,7 @@ require_once '../env.php';
 
             $body = "Hello $name,<br><br>
             <p>This email has been registered to $GLOBALS[APP_NAME].<br>Password: $_POST[password]<br><br>Please change this password to keep your account safe.
-             If you not request this, please call Customer Service 06-425635654543 or drop an email at help@ecp.my</p>
+             If you not request this, please call Customer Service 06-425635654543 or drop an email at help@housebookin.my</p>
 
             <br><br>
             <small>

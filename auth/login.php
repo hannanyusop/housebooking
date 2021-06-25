@@ -21,7 +21,7 @@
                           <input class="form-control" type="email" name="email" id="email">
                         </div>
                         <div class="form-group">
-                          <label class="col-form-label" for="password">Password</label>
+                          <label class="col-form-label" for="password">Password</label><span class="float-right"><a href="reset_password.php">Reset Password</a> </span>
                           <input class="form-control" type="password" name="password" id="password">
                         </div>
                         <div class="form-group form-row mt-3 mb-0">
