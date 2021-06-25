@@ -65,7 +65,7 @@ if(isset($_SESSION['book'])){
             <small>Please login to get full booking detail</small>";
 
             sendEmail($agent['email'], "BOOKING REQUEST", $body);
-            echo "<script>alert('New project successfully created!');window.location='booking-index.php'</script>";
+            echo "<script>alert('New booking successfully created!');window.location='booking-index.php'</script>";
         }
     }
 

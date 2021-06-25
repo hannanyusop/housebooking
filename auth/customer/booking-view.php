@@ -90,7 +90,7 @@ if(isset($_GET['id'])){
         if (!$db->query("UPDATE bookings SET receipt='$image',status=2 WHERE id=$booking_id")) {
             echo "Error:<br>" . $db->error; exit();
         }else{
-            echo "<script>alert('Voucher successfully updated!');window.location='booking-index.php'</script>";
+            echo "<script>alert('Receipt successfully insert!');window.location='booking-index.php'</script>";
         }
     }
 
