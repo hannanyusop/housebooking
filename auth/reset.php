@@ -55,7 +55,7 @@ if(isset($_GET['token'])){
         }
 
     }else{
-        echo "<script>alert('Invalid token not found!');window.location='login.php'</script>";
+        echo "<script>alert('Token not found!');window.location='login.php'</script>";
     }
 
 }else{
