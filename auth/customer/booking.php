@@ -102,6 +102,12 @@ if(isset($_SESSION['book'])){
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-3 col-form-label">House</label>
+                                            <div class="col-sm-9">
+                                                <p class="font-weight-bold"><?=$house['name']?></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-3 col-form-label">Project</label>
                                             <div class="col-sm-9">
                                                 <p class="font-weight-bold"><?=$project['name']?></p>
