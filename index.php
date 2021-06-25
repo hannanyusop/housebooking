@@ -81,6 +81,9 @@ if(isset($_GET['name'])){
                                 $brochure_q = $db->query("SELECT * FROM house_images WHERE house_id=$house[id] LIMIT 1");
                                 $brochure = $brochure_q->fetch_assoc();
 
+                                $project_q = $db->query("SELECT * FROM projects WHERE id='$house[id]'");
+                                $project   = $project_q->fetch_assoc();
+
                                 $image = 'garo/assets/img/demo/property-3.jpg';
                                 if($brochure){
                                     $image = $brochure['url'];
@@ -104,6 +107,8 @@ if(isset($_GET['name'])){
                                         <span><i class="fa fa-home"></i> <?= $house['bath_room'] ?></span>
                                         <span><i class="fa fa-car"></i> <?= $house['garage'] ?></span>
                                     </div>
+
+                                    <small>Location : <?= $project['location_name'] ??  "" ?></small>
                                 </div>
 
 

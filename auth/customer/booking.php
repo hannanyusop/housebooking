@@ -113,6 +113,13 @@ if(isset($_SESSION['book'])){
                                                 <p class="font-weight-bold"><?=$project['name']?></p>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-3 col-form-label">Location</label>
+                                            <div class="col-sm-9">
+                                                <p class="font-weight-bold"><?= $project['location_name'] ??  "" ?></p>
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-3 col-form-label">Type</label>
                                             <div class="col-sm-9">

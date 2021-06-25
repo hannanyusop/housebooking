@@ -18,6 +18,9 @@ if(isset($_GET['id'])){
     $agent_q = $db->query("SELECT * FROM agents ORDER BY RAND() LIMIT 1");
     $agent = $agent_q->fetch_assoc();
 
+    $project_q = $db->query("SELECT * FROM projects WHERE id='$house[id]'");
+    $project   = $project_q->fetch_assoc();
+
 
     #get brochure list
     $brochure_q = $db->query("SELECT * FROM house_images WHERE house_id=$house[id]");
@@ -86,6 +89,8 @@ if(isset($_GET['id'])){
                                     <h1 class="property-title"><?= $house['name'] ?></h1>
                                     <span class="property-price"><?= displayPrice($house['price']) ?></span>
                                 </div>
+
+                                <p><i class="fa fa-map-marker mr-2"></i> Location : <?= $project['location_name'] ??  "" ?></p>
 
                                 <div class="property-meta entry-meta clearfix ">
 
