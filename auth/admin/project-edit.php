@@ -28,7 +28,9 @@ if(isset($_GET['id'])){
         $start =  date('Y/m/d', strtotime($dateStr[0]));
         $end =  date('Y/m/d', strtotime($dateStr[1]));
 
-        $project = "UPDATE projects SET name='$_POST[name]',description='$_POST[description]', location_name = '$_POST[location_name]', start='$start', end='$end' ,status='$_POST[status]' WHERE id=$project_id";
+        $location = getAddress($_POST['longitude'],$_POST['latitude']);
+
+        $project = "UPDATE projects SET name='$_POST[name]',description='$_POST[description]', location_name = '$location', latitude='$_POST[latitude]', longitude = '$_POST[longitude]', start='$start', end='$end' ,status='$_POST[status]' WHERE id=$project_id";
 
         if (!$db->query($project)) {
             echo "Error: " . $project . "<br>" . $db->error; exit();
@@ -41,7 +43,7 @@ if(isset($_GET['id'])){
 
 }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
@@ -94,8 +96,21 @@ if(isset($_GET['id'])){
                                     </div>
 
                                     <div class="form-group">
+                                        <p>Click this link to get location coordinate <a href="https://www.gps-coordinates.net/" target="_blank">https://www.gps-coordinates.net/</a> </p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input class="form-control" name="latitude" id="latitude" placeholder="Latitude" value="<?= $project['latitude']?>" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" name="longitude" id="longitude" placeholder="Longitude" value="<?= $project['longitude']?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="col-form-label pt-0" for="location_name">Location Name</label>
-                                        <textarea class="form-control" name="location_name" rows="5" id="location_name" required><?= $project['location_name']?></textarea>
+                                        <textarea class="form-control" name="location_name" rows="5" id="location_name" disabled><?= $project['location_name']?></textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -132,4 +147,20 @@ if(isset($_GET['id'])){
 </body>
 
 <?php include('layout/script.php'); ?>
+<script type="text/javascript">
+    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiaGFubmFueXVzb3AiLCJhIjoiY2tzMTY2aXJ4MTd5ajJwbXN2dGV5cnd2MyJ9.iRLoHdCnmKRx385HiL-HkQ'
+    }).addTo(mymap);
+
+    var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+</script>
 </html>

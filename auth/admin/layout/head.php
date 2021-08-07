@@ -46,4 +46,7 @@
     <script src="../../assets/js/locales/es.js" type="text/javascript"></script>
     <script src="../../assets/themes/fas/theme.js" type="text/javascript"></script>
     <script src="../../assets/themes/explorer-fas/theme.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
 </head>

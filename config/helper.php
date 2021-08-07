@@ -21,7 +21,7 @@ function getEmailDomain($email){
 function getHouseType($type = null){
 
     $types = [
-        1 => 'Single Family Detached House',
+        1 => 'Single Family House',
         2 => 'Apartment',
         3 => 'Bungalow',
         4 => 'Cabin',
@@ -401,6 +401,30 @@ function displayPrice($price){
 function displayPoint($point){
 
     return $point." Ptz";
+}
+
+if(!function_exists('getAddress')) {
+
+    function getAddress($longitude, $latitude)
+    {
+
+        $mapbox = new Mapbox($GLOBALS['mapbox_token']);
+//        $longitude = 115.01;
+//        $longitude = 4.76;
+
+        $address = "Kampung Pahlawan Jalan Pandaruan, 98700 limbang";
+//        $res = $mapbox->geocode($address);
+
+        $res = $mapbox->reverseGeocode($longitude, $latitude);
+
+        if($res->success()){
+            return $res->getData()[0]['place_name'];
+        }
+
+        return "Failed to fetch address";
+
+
+    }
 }
 
 

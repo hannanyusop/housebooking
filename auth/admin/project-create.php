@@ -11,8 +11,11 @@
         $start =  date('Y/m/d', strtotime($dateStr[0]));
         $end =  date('Y/m/d', strtotime($dateStr[1]));
 
-        $project = "INSERT INTO projects (name,location_name,start,end,status, description) 
-VALUES ('$_POST[name]', '$_POST[location_name]', '$start', '$end', '$_POST[status]', '$_POST[description]')";
+        $location = getAddress($_POST['longitude'],$_POST['latitude']);
+
+
+        $project = "INSERT INTO projects (name,location_name, latitude,longitude,start,end,status, description) 
+VALUES ('$_POST[name]','$location', '$_POST[latitude]', '$_POST[longitude]', '$start', '$end', '$_POST[status]', '$_POST[description]')";
         if (!$db->query($project)) {
             echo "Error: " . $project . "<br>" . $db->error; exit();
         }else{
@@ -75,9 +78,22 @@ VALUES ('$_POST[name]', '$_POST[location_name]', '$start', '$end', '$_POST[statu
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-form-label pt-0" for="location_name">Location Name</label>
-                                        <textarea class="form-control" name="location_name" rows="5" id="location_name" data-original-title="" required>Location Name example</textarea>
+                                        <p>Click this link to get location coordinate <a href="https://www.gps-coordinates.net/" target="_blank">https://www.gps-coordinates.net/</a> </p>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input class="form-control" name="latitude" id="latitude" placeholder="Latitude" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="form-control" name="longitude" id="longitude" placeholder="Longitude"  required>
+                                        </div>
+                                    </div>
+
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="col-form-label pt-0" for="location_name">Location Name</label>-->
+<!--                                        <textarea class="form-control" name="location_name" rows="5" id="location_name" data-original-title="" required>Location Name example</textarea>-->
+<!--                                    </div>-->
 
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="status">Project Status</label>

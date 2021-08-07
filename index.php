@@ -97,7 +97,10 @@ if(isset($_GET['name'])){
                                 </div>
 
                                 <div class="item-entry overflow">
-                                    <h5><a href="view.php?id=<?= $house['id'] ?>"><?= $house['name'] ?></a></h5>
+                                    <h5>
+                                        <a href="view.php?id=<?= $house['id'] ?>"><?= $house['name'] ?></a><br>
+                                        <small><?= getHouseType($house['type']) ?></small>
+                                    </h5>
                                     <div class="dot-hr"></div>
                                     <span class="pull-left"><b> Area :</b> <?= $house['sqft'] ?> sqft</span>
                                     <span class="proerty-price pull-right"> <?= displayPrice( $house['price'] )?></span>

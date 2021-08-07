@@ -87,10 +87,9 @@ if(isset($_GET['id'])){
                             <div class="inner-wrapper">
                                 <div class="single-property-header">
                                     <h1 class="property-title"><?= $house['name'] ?></h1>
+                                    <h6 class="font-weight-bold"><?= getHouseType($house['type']) ?></h6>
                                     <span class="property-price"><?= displayPrice($house['price']) ?></span>
                                 </div>
-
-                                <p><i class="fa fa-map-marker mr-2"></i> Location : <?= $project['location_name'] ??  "" ?></p>
 
                                 <div class="property-meta entry-meta clearfix ">
 
@@ -142,11 +141,16 @@ if(isset($_GET['id'])){
                                                     <span class="property-info-value"><?= $house['garage']?></span>
                                                 </span>
                                     </div>
-
-
-
-
                                 </div>
+
+                                <div class="property-meta entry-meta clearfix">
+                                    <p><i class="fa fa-map-marker mr-2 ml-2"></i> Location : <?= $project['location_name'] ??  "" ?></p>
+
+                                    <div class="s-property-content">
+                                        <div id="mapid"></div>
+                                    </div>
+                                </div>
+
                                 <div class="dealer-section-space">
                                     <span>Dealer information</span>
                                 </div>
@@ -185,5 +189,20 @@ if(isset($_GET['id'])){
 
 
 <?php include('include/footer.php'); ?>
+<script type="text/javascript">
+    var mymap = L.map('mapid').setView([ <?=$project['latitude']?>, <?=$project['longitude']?>], 13);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        // tileSize: 512,
+        // zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiaGFubmFueXVzb3AiLCJhIjoiY2tzMTY2aXJ4MTd5ajJwbXN2dGV5cnd2MyJ9.iRLoHdCnmKRx385HiL-HkQ'
+    }).addTo(mymap);
+
+    var marker = L.marker([<?=$project['latitude']?>, <?=$project['longitude']?>]).addTo(mymap);
+
+    marker.bindPopup("<b><?= $house['name'] ?></b><br><?= $project['location_name'] ??  "" ?>.").openPopup();
+</script>
 </body>
 </html>

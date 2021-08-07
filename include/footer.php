@@ -33,6 +33,10 @@
 <script type="text/javascript" src="../garo/assets/js/lightslider.min.js"></script>
 <script src="../garo/assets/js/main.js"></script>
 
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
 <script>
     $(document).ready(function () {
 
