@@ -64,7 +64,7 @@ function getBadgeProjectStatus($status = null){
 function getBookingStatus($status = null){
 
     $statuses = [
-        0 => 'Wait For Approval From Customer',
+        0 => 'Waiting For Approval From Customer',
         1 => 'Pending Booking Fee',
         2 => 'Wait For Payment Approval',
         3 => 'Approved',
@@ -78,7 +78,7 @@ function getBookingStatus($status = null){
 function getBadgeBookingStatus($status = null){
 
     $statuses = [
-        0 => "<span class='badge badge-warning'>Wait For Approval From Customer</span>",
+        0 => "<span class='badge badge-warning'>Waiting For Approval From Customer</span>",
         1 => "<span class='badge badge-info'>Pending Booking Fee</span>",
         2 => "<span class='badge badge-info'>Wait For Payment Approval</span>",
         3 => "<span class='badge badge-success'>Approved</span>",
@@ -418,12 +418,51 @@ if(!function_exists('getAddress')) {
         $res = $mapbox->reverseGeocode($longitude, $latitude);
 
         if($res->success()){
-            return $res->getData()[0]['place_name'];
+
+            $state = null;
+            foreach ($res->getData()[0]['context'] as $data){
+
+                if(in_array($data['text'], stateList())){
+                    $state = $data['text'];
+                }
+            }
+            return [
+                'location_name' => $res->getData()[0]['place_name'],
+                'state'         => $state
+            ];
         }
 
-        return "Failed to fetch address";
+        return [
+            'location_name' => "Failed to fetch address",
+            'state'         => null
+        ];
+    }
+}
 
+if(!function_exists('stateList')){
 
+    function stateList(){
+
+        $states = [
+            'Johor' => 'Johor',
+            'Kedah' => 'Kedah',
+            'Kelantan' => 'Kelantan',
+            'Melaka' => 'Melaka',
+            'Negeri Sembilan' => 'Negeri Sembilan',
+            'Pahang' => 'Pahang',
+            'Perak' => 'Perak',
+            'Perlis' => 'Perlis',
+            'Pulau Pinang' => 'Pulau Pinang',
+            'Sabah' => 'Sabah',
+            'Sarawak' => 'Sarawak',
+            'Selangor' => 'Selangor',
+            'Terengganu' => 'Terengganu',
+            'W.P. Kuala Lumpur' => 'W.P. Kuala Lumpur',
+            'W.P. Labuan' => 'W.P. Labuan',
+            'W.P. Putrajaya' => 'W.P. Putrajaya',
+        ];
+
+        return $states;
     }
 }
 

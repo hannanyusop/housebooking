@@ -18,7 +18,7 @@ if(isset($_GET['id'])){
     $agent_q = $db->query("SELECT * FROM agents ORDER BY RAND() LIMIT 1");
     $agent = $agent_q->fetch_assoc();
 
-    $project_q = $db->query("SELECT * FROM projects WHERE id='$house[id]'");
+    $project_q = $db->query("SELECT * FROM projects WHERE id='$house[project_id]'");
     $project   = $project_q->fetch_assoc();
 
 
@@ -73,7 +73,12 @@ if(isset($_GET['id'])){
                         <div class="section">
                             <h4 class="s-property-title">Description</h4>
                             <div class="s-property-content">
+                                <?= $project['description']?>
+
+                                <br><br>
+
                                 <?= $house['description']?>
+
                             </div>
                         </div>
                     </div>
@@ -144,6 +149,7 @@ if(isset($_GET['id'])){
                                 </div>
 
                                 <div class="property-meta entry-meta clearfix">
+                                    <p><i class="fa fa-map-marker mr-2 ml-2"></i> State : <?= $project['state'] ??  "" ?></p>
                                     <p><i class="fa fa-map-marker mr-2 ml-2"></i> Location : <?= $project['location_name'] ??  "" ?></p>
 
                                     <div class="s-property-content">

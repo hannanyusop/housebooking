@@ -9,6 +9,7 @@ $in_type = '';
 if(isset($_GET['name'])){
 
     $name = $_GET['name'];
+    $in_type = $location = "";
 
     if(isset($_GET['type']) && $_GET['type'] != ""){
         $type = $_GET['type'];
@@ -17,9 +18,18 @@ if(isset($_GET['name'])){
 //        $in_type = "AND type IN(".implode(",",$type).")";
 
     }
-    $houses_q = $db->query("SELECT * FROM houses WHERE name LIKE '%$name%' $in_type AND current_booking_id IS NULL ");
+
+    if(isset($_GET['location']) && $_GET['location'] != ""){
+        $location = $_GET['location'];
+        $location = "AND state='$location'";
+
+//        $in_type = "AND type IN(".implode(",",$type).")";
+
+    }
+    $houses_q = $db->query("SELECT *,h.id house_id,h.name as house_name,h.type house_type FROM houses h LEFT JOIN projects p ON p.id=h.project_id WHERE h.name LIKE '%$name%' $in_type AND current_booking_id IS NULL $location");
+
 }else{
-    $houses_q = $db->query("SELECT * FROM houses WHERE current_booking_id IS NULL");
+    $houses_q = $db->query("SELECT *,h.id house_id,h.name as house_name,h.type house_type FROM houses h LEFT JOIN projects p ON p.id=h.project_id WHERE current_booking_id IS NULL");
 }
 ?>
 
@@ -41,10 +51,18 @@ if(isset($_GET['name'])){
                             <input type="text" name="name" class="form-control" placeholder="Key word" value="<?= $_GET['name'] ?? '' ?>">
                         </div>
                         <div class="form-group">
-                            <select id="lunchBegins" name="type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select House Type">
+                            <select id="type" name="type" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select House Type">
                                 <option value="">All</option>
                                 <?php foreach (getHouseType() as $key => $name_type){ ?>
                                     <option value="<?= $key?>" <?= (isset($_GET['type']) == $key)? "selected" : "" ?>><?= $name_type ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select id="location" name="location" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Location">
+                                <option value="">All</option>
+                                <?php foreach (stateList() as $state){ ?>
+                                    <option value="<?=$state?>" <?= (isset($_GET['location']) == $state)? "selected" : "" ?>><?= $state ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -78,10 +96,10 @@ if(isset($_GET['name'])){
 
                         <?php while($house = $houses_q->fetch_assoc()){ ;?>
                             <?php
-                                $brochure_q = $db->query("SELECT * FROM house_images WHERE house_id=$house[id] LIMIT 1");
+                                $brochure_q = $db->query("SELECT * FROM house_images WHERE house_id=$house[house_id] LIMIT 1");
                                 $brochure = $brochure_q->fetch_assoc();
 
-                                $project_q = $db->query("SELECT * FROM projects WHERE id='$house[id]'");
+                                $project_q = $db->query("SELECT * FROM projects WHERE id='$house[house_id]'");
                                 $project   = $project_q->fetch_assoc();
 
                                 $image = 'garo/assets/img/demo/property-3.jpg';
@@ -93,25 +111,24 @@ if(isset($_GET['name'])){
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="view.php?id=<?= $house['id'] ?>" ><img src="<?= $image ?>" alt=""></a>
+                                    <a href="view.php?id=<?= $house['house_id'] ?>" ><img src="<?= $image ?>" alt=""></a>
                                 </div>
 
                                 <div class="item-entry overflow">
                                     <h5>
-                                        <a href="view.php?id=<?= $house['id'] ?>"><?= $house['name'] ?></a><br>
-                                        <small><?= getHouseType($house['type']) ?></small>
+                                        <a href="view.php?id=<?= $house['house_id'] ?>"><?= $house['name'] ?></a><br>
+                                        <small><?= getHouseType($house['house_type']) ?></small>
                                     </h5>
                                     <div class="dot-hr"></div>
                                     <span class="pull-left"><b> Area :</b> <?= $house['sqft'] ?> sqft</span>
                                     <span class="proerty-price pull-right"> <?= displayPrice( $house['price'] )?></span>
-                                    <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
                                     <div class="property-icon">
                                         <span class="font-weight-bold"><i class="fa fa-bed"></i> <?= $house['room'] ?></span>
                                         <span><i class="fa fa-home"></i> <?= $house['bath_room'] ?></span>
                                         <span><i class="fa fa-car"></i> <?= $house['garage'] ?></span>
                                     </div>
 
-                                    <small>Location : <?= $project['location_name'] ??  "" ?></small>
+                                    <small>State : <?= $house['state'] ??  "" ?></small>
                                 </div>
 
 

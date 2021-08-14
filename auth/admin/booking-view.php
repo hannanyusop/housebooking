@@ -47,8 +47,8 @@ if(isset($_GET['id'])){
             $db->query("UPDATE houses SET current_booking_id=$booking_id WHERE id=$house[id]");
 
             $agent_point = $agent['point']+$point;
-            $agent_total_point = $agent['total_point']+$point;
-            $update_agent = $db->query("UPDATE agents SET total_point=$agent_total_point, point=$agent_point,rank=$rank WHERE id='$agent[id]'");
+//            $agent_total_point = $agent['total_point']+$point;
+            $update_agent = $db->query("UPDATE agents SET point=$agent_point,rank=$rank WHERE id='$agent[id]'");
             echo "<script>alert('Booking approved!');window.location='booking-view.php?id=$booking_id'</script>";
         }else{
 

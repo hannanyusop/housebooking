@@ -30,7 +30,7 @@ if(isset($_GET['id'])){
 
         $location = getAddress($_POST['longitude'],$_POST['latitude']);
 
-        $project = "UPDATE projects SET name='$_POST[name]',description='$_POST[description]', location_name = '$location', latitude='$_POST[latitude]', longitude = '$_POST[longitude]', start='$start', end='$end' ,status='$_POST[status]' WHERE id=$project_id";
+        $project = "UPDATE projects SET name='$_POST[name]',description='$_POST[description]', location_name = '$location[location_name]',state = '$location[state]', latitude='$_POST[latitude]', longitude = '$_POST[longitude]', start='$start', end='$end' ,status='$_POST[status]' WHERE id=$project_id";
 
         if (!$db->query($project)) {
             echo "Error: " . $project . "<br>" . $db->error; exit();

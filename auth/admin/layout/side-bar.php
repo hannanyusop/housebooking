@@ -11,10 +11,14 @@
         <ul class="sidebar-menu">
 
             <li><a class="sidebar-header " href="index.php"><i data-feather="menu"></i><span>Dashboard</span></a></li>
-            <li>
-                <a class="sidebar-header" href="project-index.php" class="" >
-                    <i data-feather="book"></i><span>Project Management</span>
+            <li class="">
+                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Project Management</span>
+                    <i class="fa fa-angle-right pull-right"></i>
                 </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="project-index.php" class=""><i class="fa fa-circle"></i>List</a></li>
+                    <li><a href="project-report.php" class=""><i class="fa fa-circle"></i>Report</a></li>
+                </ul>
             </li>
             <li>
                 <a class="sidebar-header" href="booking-index.php" class="" >

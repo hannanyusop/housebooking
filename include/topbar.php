@@ -1,6 +1,6 @@
-<div id="preloader">
-    <div id="status">&nbsp;</div>
-</div>
+<!--<div id="preloader">-->
+<!--    <div id="status">&nbsp;</div>-->
+<!--</div>-->
 
 <nav class="navbar navbar-default ">
     <div class="container">

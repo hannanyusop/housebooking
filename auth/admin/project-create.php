@@ -14,8 +14,8 @@
         $location = getAddress($_POST['longitude'],$_POST['latitude']);
 
 
-        $project = "INSERT INTO projects (name,location_name, latitude,longitude,start,end,status, description) 
-VALUES ('$_POST[name]','$location', '$_POST[latitude]', '$_POST[longitude]', '$start', '$end', '$_POST[status]', '$_POST[description]')";
+        $project = "INSERT INTO projects (name,location_name,state, latitude,longitude,start,end,status, description) 
+VALUES ('$_POST[name]','$location[location_name]','$location[state]', '$_POST[latitude]', '$_POST[longitude]', '$start', '$end', '$_POST[status]', '$_POST[description]')";
         if (!$db->query($project)) {
             echo "Error: " . $project . "<br>" . $db->error; exit();
         }else{
