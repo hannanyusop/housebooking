@@ -4209,7 +4209,7 @@ ul .submenu input {
 .page-wrapper .page-body-wrapper .page-sidebar {
     width: 255px;
     position: fixed;
-    background: rgb(225, 119, 15);
+    background: rgba(62, 122, 239, 0.86);
     top: 0;
     height: calc(100vh);
     z-index: 1000;

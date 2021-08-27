@@ -260,7 +260,9 @@ if(isset($_GET['id'])){
                             <div class="form-group row" id="code_div">
                                 <label for="receipt" class="col-sm-3 col-form-label">Booking Fee Receipt</label>
                                 <div class="col-sm-9">
-                                    <img src="<?= $booking['receipt'] ?>" width="400">
+                                    <embed src="<?= $booking['receipt'] ?>"><br>
+
+                                    <a class="btn btn-info btn-sm" href="<?= $booking['receipt'] ?>" download> <span><i class="fa fa-download"></i> Download</span></a>
                                 </div>
                             </div>
                         <?php } ?>
