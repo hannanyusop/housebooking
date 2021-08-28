@@ -116,7 +116,7 @@ if(isset($_GET['name'])){
 
                                 <div class="item-entry overflow">
                                     <h5>
-                                        <a href="view.php?id=<?= $house['house_id'] ?>"><?= $house['name'] ?></a><br>
+                                        <a href="view.php?id=<?= $house['house_id'] ?>"><?= strLimit($house['name'], 15) ?></a><br>
                                         <small><?= getHouseType($house['house_type']) ?></small>
                                     </h5>
                                     <div class="dot-hr"></div>
