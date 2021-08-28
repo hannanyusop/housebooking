@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
 
         $statuses = [
             3 => 'Approved',
-            0 => 'Available',
+            0 => 'Waiting For Approval From Customer',
             1 => 'Pending Booking Fee',
             2 => 'Wait For Payment Approval',
         ];
