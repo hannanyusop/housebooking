@@ -155,11 +155,11 @@ if(isset($_GET['id'])){
 
     var oilData = {
         labels: [
-            "Waiting For Approval From Customer",
+            "Available",
             "Pending Booking Fee",
             "Wait For Payment Approval",
             "Approved",
-            "Available"
+            "Waiting For Approval From Customer"
         ],
         datasets: [
             {
