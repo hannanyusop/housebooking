@@ -102,10 +102,23 @@ if(isset($_GET['id'])){
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= $data['code']?></td>
-                                                <td><?= (is_null($data['agent_id']))? "Fully Redeem" : "Available" ?></td>
-                                                <td><?= (is_null($data['agent_id']))? $data['agent_id'] : "-" ?></td>
-                                                <td><?= (is_null($data['agent_id']))? $data['claim_at'] : "-" ?></td>
-                                                <td><?= (is_null($data['agent_id']))? displayPoint($data['cost']) : "-"?></td>
+                                                <td><?= (!is_null($data['agent_id']))? "Fully Redeem" : "Available" ?></td>
+                                                <td>
+                                                    <?php
+                                                     if(!is_null($data['agent_id'])){
+
+                                                         $redeem_by_q = $db->query("SELECT * FROM agents WHERE id=$data[agent_id]");
+                                                         $redeem_by   = $redeem_by_q->fetch_assoc();
+
+                                                         echo $redeem_by['name'];
+
+                                                     }else{
+                                                         echo " - ";
+                                                     }
+                                                    ?>
+                                                </td>
+                                                <td><?= (!is_null($data['agent_id']))? $data['claim_at'] : "-" ?></td>
+                                                <td><?= (!is_null($data['agent_id']))? displayPoint($data['cost']) : "-"?></td>
                                                 <td>
                                                     <a href="voucher-view.php?id=<?=$voucher_id?>&delete=<?= $data['id']; ?>" onclick="return confirm('Are you sure want to delete this voucher?')" class="btn btn-danger btn-xs">Delete</a>
                                                 </td>
