@@ -154,20 +154,14 @@ if(isset($_GET['id'])){
     Chart.defaults.global.defaultFontSize = 18;
 
     var oilData = {
-        labels: [
-            "Available",
-            "Pending Booking Fee",
-            "Wait For Payment Approval",
-            "Approved",
-            "Waiting For Approval From Customer"
-        ],
+        labels: <?= json_encode(array_keys($pie)) ?>,
         datasets: [
             {
                 data: <?= json_encode(array_values($pie)) ?>,
                 backgroundColor: [
                     "#FF6384",
                     "#63FF84",
-                    "#84FF63",
+                    "#e1770f",
                     "#8463FF",
                     "#6384FF"
                 ]
