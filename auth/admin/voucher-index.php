@@ -77,6 +77,7 @@
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Image</th>
+                                            <th>Point</th>
                                             <th>Quantity</th>
                                             <th>Valid Until</th>
                                             <th>Action</th>
@@ -96,6 +97,7 @@
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
                                                 <td><img src="<?= $data['image']?>" width="40px"></td>
+                                                <td><?= displayPoint($data['cost']); ?></td>
                                                 <td><?= $not_claims_count. "/". $num_total_q; ?></td>
                                                 <td><?= getBadgeVoucherStatus($data['status']) ?></td>
                                                 <td>

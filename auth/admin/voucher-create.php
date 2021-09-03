@@ -88,7 +88,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-form-label pt-0" for="cost">Cost</label>
+                                        <label class="col-form-label pt-0" for="cost">Point</label>
                                         <input class="form-control col-md-6" id="cost" value="0" name="cost" type="number" min="0">
                                     </div>
 
@@ -101,11 +101,9 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            <a href="project-index.php" class="btn btn-secondary" data-original-title="" title="">Cancel</a>
-                                        </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a href="voucher-index.php" class="btn btn-warning">Cancel</a>
                                     </div>
                                 </form>
                             </div>
